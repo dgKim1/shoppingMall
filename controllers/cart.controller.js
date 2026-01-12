@@ -49,4 +49,74 @@ cartController.addToCart = async (req, res) => {
   }
 };
 
+cartController.removeCartItemById = async (req, res) => {
+  try {
+    const { userId } = req;
+    const { id } = req.params;
+
+    const cart = await Cart.findOne({ userId });
+    if (!cart) {
+      throw new Error("cart not found");
+    }
+
+    const deletedItem = await CartItem.findOneAndDelete({
+      _id: id,
+      cartId: cart._id,
+    });
+
+    if (!deletedItem) {
+      throw new Error("cart item not found");
+    }
+
+    return res.status(200).json({ status: "success", data: deletedItem });
+  } catch (error) {
+    res.status(400).json({ status: "fail", error: error.message });
+  }
+};
+
+cartController.removeCartItemByProduct = async (req, res) => {
+  try {
+    const { userId } = req;
+    const { productId, size } = req.body;
+
+    if (!productId || !size) {
+      throw new Error("productId and size are required");
+    }
+
+    const cart = await Cart.findOne({ userId });
+    if (!cart) {
+      throw new Error("cart not found");
+    }
+
+    const deletedItem = await CartItem.findOneAndDelete({
+      cartId: cart._id,
+      productId,
+      size,
+    });
+
+    if (!deletedItem) {
+      throw new Error("cart item not found");
+    }
+
+    return res.status(200).json({ status: "success", data: deletedItem });
+  } catch (error) {
+    res.status(400).json({ status: "fail", error: error.message });
+  }
+};
+
+cartController.clearCart = async (req, res) => {
+  try {
+    const { userId } = req;
+    const cart = await Cart.findOne({ userId });
+    if (!cart) {
+      throw new Error("cart not found");
+    }
+
+    await CartItem.deleteMany({ cartId: cart._id });
+    return res.status(200).json({ status: "success" });
+  } catch (error) {
+    res.status(400).json({ status: "fail", error: error.message });
+  }
+};
+
 module.exports = cartController;
