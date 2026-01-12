@@ -1,4 +1,5 @@
 const Product = require("../Model/Product");
+const ProductStock = require("../Model/ProductStock");
 const productController = {};
 
 productController.createProduct = async(req,res)=>{
@@ -81,6 +82,19 @@ productController.updateProductById = async (req, res) => {
         res.status(400).json({ status: "fail", error: error.message });
     }
 }
+
+productController.checkAndDecreaseStock = async (productId, size, quantity) => {
+    const qty = Math.max(parseInt(quantity, 10) || 1, 1);
+    const stock = await ProductStock.findOneAndUpdate(
+        { productId, size, quantity: { $gte: qty } },
+        { $inc: { quantity: -qty } },
+        { new: true }
+    );
+    if (!stock) {
+        throw new Error("insufficient stock");
+    }
+    return stock;
+};
 
 
 module.exports = productController;

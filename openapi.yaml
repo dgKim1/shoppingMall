@@ -11,6 +11,8 @@ tags:
     description: User management
   - name: Product
     description: Product management
+  - name: Order
+    description: Order management
   - name: Cart
     description: Cart management
 components:
@@ -235,6 +237,28 @@ paths:
                 productId:
                   type: string
                 size:
+                  type: string
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+
+  /order:
+    post:
+      summary: Create order from cart
+      tags: [Order]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [shipTo]
+              properties:
+                shipTo:
                   type: string
       responses:
         "200":

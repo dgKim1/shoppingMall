@@ -5,9 +5,9 @@ const orderSchema = new Schema(
   {
     userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
     status: { type: String, default: "preparing" },
+    orderId: { type: String, required: true, unique: true },
     totalPrice: { type: Number, required: true, default: 0 },
     shipTo: { type: String, required: true },
-    contact: { type: String, required: true },
   },
   { timestamps: { createdAt: true, updatedAt: false } }
 );
