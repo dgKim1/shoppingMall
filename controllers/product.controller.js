@@ -23,7 +23,7 @@ productController.createProduct = async(req,res)=>{
 }
 
 
-proudctController.getAllProducts = async(req,res)=>{
+productController.getAllProducts = async(req,res)=>{
     try{
         const allProducts = await Product.find({});
         return res.status(200).json({
