@@ -1,5 +1,3 @@
-
-
 const User = require("../Model/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken")
@@ -37,5 +35,17 @@ authController.authenticate = async(req,res,next) => {
     res.status(400).json({status:"fail", error:error.message})
   }
 }
+
+
+authController.checkAdminPermission = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.userId);
+    if (!user) throw new Error("user not found");
+    if (user.role !== "admin") throw new Error("permission denied");
+    next();
+  } catch (error) {
+    res.status(403).json({ status: "fail", error: error.message });
+  }
+};
 
 module.exports = authController;
