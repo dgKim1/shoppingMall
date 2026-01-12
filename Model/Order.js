@@ -1,31 +1,22 @@
-const mongoose = require("mongoose")
-const User = require("./User");
-const Product = require("./Product");
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const orderSchema = Schema({
-    userId: {type:mongoose.objectId, required: true, ref:User, required: true},
-    status: {type:String, default: "preparing"},
-    totalPrice: {type: Number, required: true, default: 0 },
-    shipTo: {type:Object, required:true},
-    contact: {type:Object, required:true},
-    orderNum:{type: String},
-    items:[
-        {
-            productId: {type: mongoose.ObjectId, ref: Product, required: true},
-            price: {type: Number, required: true},
-            qty: {type: Number, required: true, default: 1},
-            size: { type: String, required: true}
-        }
-    ]
-},{timestamps:true})
+const orderSchema = new Schema(
+  {
+    userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    status: { type: String, default: "preparing" },
+    totalPrice: { type: Number, required: true, default: 0 },
+    shipTo: { type: String, required: true },
+    contact: { type: String, required: true },
+  },
+  { timestamps: { createdAt: true, updatedAt: false } }
+);
 
 orderSchema.methods.toJSON = function () {
-    const obj = this._doc;
-    delete obj.__v;
-    delete obj.updateAt;
-    return obj;
-}
+  const obj = this._doc;
+  delete obj.__v;
+  return obj;
+};
 
-const Order = mongoose.model("Order",orderSchema);
+const Order = mongoose.model("Order", orderSchema);
 module.exports = Order;
