@@ -6,4 +6,9 @@ router.post("/createProdcut",authController.authenticate,
     authController.checkAdminPermission,
     productController.createProduct);
 
+router.get("getAllProducts",proudctController.getAllProducts);
+router.get("getProductsBySearch",productController.getProductsBySearch);
+router.put("updateProductById/:id", authController.authenticate, authController.checkAdminPermission, productController.updateProductById);
+
+
 module.exports = router;
