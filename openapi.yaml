@@ -11,6 +11,8 @@ tags:
     description: User management
   - name: Product
     description: Product management
+  - name: Cart
+    description: Cart management
 components:
   securitySchemes:
     bearerAuth:
@@ -158,6 +160,32 @@ paths:
           application/json:
             schema:
               type: object
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+  /cart:
+    post:
+      summary: Add item to cart
+      tags: [Cart]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [productId, size]
+              properties:
+                productId:
+                  type: string
+                size:
+                  type: string
+                quantity:
+                  type: integer
+                  default: 1
       responses:
         "200":
           description: OK
