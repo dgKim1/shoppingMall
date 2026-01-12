@@ -1,5 +1,8 @@
 const User = require("../Model/User");
 const bcrypt = require("bcryptjs");
+const crypto = require("crypto");
+const { OAuth2Client } = require("google-auth-library");
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 const userController = {};
 
 //회원 가입
@@ -43,6 +46,45 @@ userController.getUser = async (req,res) =>{
     })
   }
 }
+
+// Google login: verify idToken, create user if not exists, return app token
+userController.loginWithGoogle = async (req, res) => {
+  try {
+    const { idToken } = req.body;
+    if (!idToken) {
+      throw new Error("idToken is required");
+    }
+
+    const ticket = await client.verifyIdToken({
+      idToken,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+    const payload = ticket.getPayload();
+    if (!payload || !payload.email) {
+      throw new Error("invalid google token");
+    }
+
+    let user = await User.findOne({ email: payload.email });
+    if (!user) {
+      const randomPassword = crypto.randomBytes(16).toString("hex");
+      const salt = await bcrypt.genSaltSync(10);
+      const hashedPassword = await bcrypt.hash(randomPassword, salt);
+
+      user = new User({
+        email: payload.email,
+        password: hashedPassword,
+        name: payload.name || payload.email,
+        role: "customer",
+      });
+      await user.save();
+    }
+
+    const token = await user.generateToken();
+    return res.status(200).json({ status: "success", user, token });
+  } catch (error) {
+    res.status(400).json({ status: "fail", error: error.message });
+  }
+};
 
 
 

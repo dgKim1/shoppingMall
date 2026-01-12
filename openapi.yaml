@@ -44,6 +44,25 @@ paths:
           description: OK
         "400":
           description: Bad Request
+  /auth/google:
+    post:
+      summary: Login with Google
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [idToken]
+              properties:
+                idToken:
+                  type: string
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
   /user:
     post:
       summary: Create user
