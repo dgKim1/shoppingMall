@@ -21,6 +21,153 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
+  schemas:
+    SuccessResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+    AuthLoginResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        user:
+          $ref: "#/components/schemas/User"
+        token:
+          type: string
+    UserResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        user:
+          $ref: "#/components/schemas/User"
+    ProductResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        data:
+          $ref: "#/components/schemas/Product"
+    ProductListResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Product"
+    ProductSearchResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Product"
+        total:
+          type: integer
+        totalPages:
+          type: integer
+        page:
+          type: integer
+    CartItemResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        data:
+          $ref: "#/components/schemas/CartItem"
+    OrderResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        data:
+          $ref: "#/components/schemas/Order"
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+        role:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+    Product:
+      type: object
+      properties:
+        _id:
+          type: string
+        sku:
+          type: string
+        name:
+          type: string
+        image:
+          type: string
+        price:
+          type: number
+        description:
+          type: string
+        category:
+          type: array
+          items:
+            type: string
+        status:
+          type: string
+        isDeleted:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+    CartItem:
+      type: object
+      properties:
+        _id:
+          type: string
+        cartId:
+          type: string
+        productId:
+          type: string
+        size:
+          type: string
+        quantity:
+          type: integer
+    Order:
+      type: object
+      properties:
+        _id:
+          type: string
+        userId:
+          type: string
+        status:
+          type: string
+        orderId:
+          type: string
+        totalPrice:
+          type: number
+        shipTo:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
 paths:
   /auth/login:
     post:
@@ -42,6 +189,10 @@ paths:
       responses:
         "200":
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthLoginResponse"
         "400":
           description: Bad Request
   /auth/google:
@@ -87,6 +238,10 @@ paths:
       responses:
         "200":
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
         "400":
           description: Bad Request
   /user/me:
@@ -98,6 +253,10 @@ paths:
       responses:
         "200":
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserResponse"
         "400":
           description: Bad Request
   /product/createProdcut:
@@ -134,6 +293,10 @@ paths:
       responses:
         "200":
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
         "400":
           description: Bad Request
   /product/getAllProducts:
@@ -143,6 +306,10 @@ paths:
       responses:
         "200":
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductListResponse"
         "400":
           description: Bad Request
   /product/getProductsBySearch:
@@ -161,6 +328,10 @@ paths:
       responses:
         "200":
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductSearchResponse"
         "400":
           description: Bad Request
   /product/updateProductById/{id}:
@@ -184,6 +355,10 @@ paths:
       responses:
         "200":
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductResponse"
         "400":
           description: Bad Request
   /cart:
@@ -210,6 +385,10 @@ paths:
       responses:
         "200":
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CartItemResponse"
         "400":
           description: Bad Request
     delete:
@@ -220,6 +399,10 @@ paths:
       responses:
         "200":
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
         "400":
           description: Bad Request
   /cart/item/{id}:
@@ -237,6 +420,10 @@ paths:
       responses:
         "200":
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CartItemResponse"
         "400":
           description: Bad Request
   /cart/item:
@@ -260,6 +447,10 @@ paths:
       responses:
         "200":
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CartItemResponse"
         "400":
           description: Bad Request
 
@@ -282,5 +473,9 @@ paths:
       responses:
         "200":
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrderResponse"
         "400":
           description: Bad Request
