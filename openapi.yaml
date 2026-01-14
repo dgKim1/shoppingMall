@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: nodeShop API
+  title: nodeShop API(테스트)
   version: 1.0.0
 servers:
   - url: /api
