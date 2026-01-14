@@ -50,8 +50,8 @@ jobs:
             set -e
             echo "$GHCR_TOKEN" | docker login ghcr.io -u "$GHCR_USER" --password-stdin
             cd "$DEPLOY_PATH"
-            docker-compose pull
-            docker-compose up -d --no-build --remove-orphans
+            sudo docker-compose pull
+            sudo docker-compose up -d --no-build --remove-orphans
         env:
           GHCR_USER: ${{ secrets.GHCR_USER }}
           GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
