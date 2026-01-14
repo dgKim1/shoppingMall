@@ -52,3 +52,7 @@ jobs:
             cd "$DEPLOY_PATH"
             docker-compose pull
             docker-compose up -d --no-build --remove-orphans
+        env:
+          GHCR_USER: ${{ secrets.GHCR_USER }}
+          GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
