@@ -28,6 +28,8 @@ components:
         status:
           type: string
           example: success
+      example:
+        status: success
     AuthLoginResponse:
       type: object
       properties:
@@ -38,6 +40,16 @@ components:
           $ref: "#/components/schemas/User"
         token:
           type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.example.signature
+      example:
+        status: success
+        user:
+          _id: 65f0d1c2a1b2c3d4e5f67890
+          email: user@example.com
+          name: Jane Doe
+          role: customer
+          createdAt: 2025-01-01T12:00:00Z
+        token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.example.signature
     UserResponse:
       type: object
       properties:
@@ -46,6 +58,14 @@ components:
           example: success
         user:
           $ref: "#/components/schemas/User"
+      example:
+        status: success
+        user:
+          _id: 65f0d1c2a1b2c3d4e5f67890
+          email: user@example.com
+          name: Jane Doe
+          role: customer
+          createdAt: 2025-01-01T12:00:00Z
     ProductResponse:
       type: object
       properties:
@@ -54,6 +74,20 @@ components:
           example: success
         data:
           $ref: "#/components/schemas/Product"
+      example:
+        status: success
+        data:
+          _id: 65f0d1c2a1b2c3d4e5f67891
+          sku: SKU-001
+          name: Basic Tee
+          image: https://example.com/images/tee.jpg
+          price: 19.99
+          description: Soft cotton t-shirt.
+          category:
+            - tops
+          status: active
+          isDeleted: false
+          createdAt: 2025-01-01T12:00:00Z
     ProductListResponse:
       type: object
       properties:
@@ -64,6 +98,20 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Product"
+      example:
+        status: success
+        data:
+          - _id: 65f0d1c2a1b2c3d4e5f67891
+            sku: SKU-001
+            name: Basic Tee
+            image: https://example.com/images/tee.jpg
+            price: 19.99
+            description: Soft cotton t-shirt.
+            category:
+              - tops
+            status: active
+            isDeleted: false
+            createdAt: 2025-01-01T12:00:00Z
     ProductSearchResponse:
       type: object
       properties:
@@ -80,6 +128,23 @@ components:
           type: integer
         page:
           type: integer
+      example:
+        status: success
+        data:
+          - _id: 65f0d1c2a1b2c3d4e5f67891
+            sku: SKU-001
+            name: Basic Tee
+            image: https://example.com/images/tee.jpg
+            price: 19.99
+            description: Soft cotton t-shirt.
+            category:
+              - tops
+            status: active
+            isDeleted: false
+            createdAt: 2025-01-01T12:00:00Z
+        total: 1
+        totalPages: 1
+        page: 1
     CartItemResponse:
       type: object
       properties:
@@ -88,6 +153,14 @@ components:
           example: success
         data:
           $ref: "#/components/schemas/CartItem"
+      example:
+        status: success
+        data:
+          _id: 65f0d1c2a1b2c3d4e5f67892
+          cartId: 65f0d1c2a1b2c3d4e5f67893
+          productId: 65f0d1c2a1b2c3d4e5f67891
+          size: M
+          quantity: 2
     OrderResponse:
       type: object
       properties:
@@ -96,6 +169,16 @@ components:
           example: success
         data:
           $ref: "#/components/schemas/Order"
+      example:
+        status: success
+        data:
+          _id: 65f0d1c2a1b2c3d4e5f67894
+          userId: 65f0d1c2a1b2c3d4e5f67890
+          status: preparing
+          orderId: OD12ab34cd5678
+          totalPrice: 39.98
+          shipTo: Seoul, KR
+          createdAt: 2025-01-01T12:00:00Z
     User:
       type: object
       properties:
@@ -111,6 +194,12 @@ components:
         createdAt:
           type: string
           format: date-time
+      example:
+        _id: 65f0d1c2a1b2c3d4e5f67890
+        email: user@example.com
+        name: Jane Doe
+        role: customer
+        createdAt: 2025-01-01T12:00:00Z
     Product:
       type: object
       properties:
@@ -137,6 +226,18 @@ components:
         createdAt:
           type: string
           format: date-time
+      example:
+        _id: 65f0d1c2a1b2c3d4e5f67891
+        sku: SKU-001
+        name: Basic Tee
+        image: https://example.com/images/tee.jpg
+        price: 19.99
+        description: Soft cotton t-shirt.
+        category:
+          - tops
+        status: active
+        isDeleted: false
+        createdAt: 2025-01-01T12:00:00Z
     CartItem:
       type: object
       properties:
@@ -150,6 +251,12 @@ components:
           type: string
         quantity:
           type: integer
+      example:
+        _id: 65f0d1c2a1b2c3d4e5f67892
+        cartId: 65f0d1c2a1b2c3d4e5f67893
+        productId: 65f0d1c2a1b2c3d4e5f67891
+        size: M
+        quantity: 2
     Order:
       type: object
       properties:
@@ -168,6 +275,14 @@ components:
         createdAt:
           type: string
           format: date-time
+      example:
+        _id: 65f0d1c2a1b2c3d4e5f67894
+        userId: 65f0d1c2a1b2c3d4e5f67890
+        status: preparing
+        orderId: OD12ab34cd5678
+        totalPrice: 39.98
+        shipTo: Seoul, KR
+        createdAt: 2025-01-01T12:00:00Z
 paths:
   /auth/login:
     post:
@@ -193,6 +308,15 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/AuthLoginResponse"
+              example:
+                status: success
+                user:
+                  _id: 65f0d1c2a1b2c3d4e5f67890
+                  email: user@example.com
+                  name: Jane Doe
+                  role: customer
+                  createdAt: 2025-01-01T12:00:00Z
+                token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.example.signature
         "400":
           description: Bad Request
   /user:
@@ -223,6 +347,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SuccessResponse"
+              example:
+                status: success
         "400":
           description: Bad Request
   /user/me:
@@ -238,6 +364,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UserResponse"
+              example:
+                status: success
+                user:
+                  _id: 65f0d1c2a1b2c3d4e5f67890
+                  email: user@example.com
+                  name: Jane Doe
+                  role: customer
+                  createdAt: 2025-01-01T12:00:00Z
         "400":
           description: Bad Request
   /product/createProdcut:
@@ -278,6 +412,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SuccessResponse"
+              example:
+                status: success
         "400":
           description: Bad Request
   /product/getAllProducts:
@@ -291,6 +427,20 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ProductListResponse"
+              example:
+                status: success
+                data:
+                  - _id: 65f0d1c2a1b2c3d4e5f67891
+                    sku: SKU-001
+                    name: Basic Tee
+                    image: https://example.com/images/tee.jpg
+                    price: 19.99
+                    description: Soft cotton t-shirt.
+                    category:
+                      - tops
+                    status: active
+                    isDeleted: false
+                    createdAt: 2025-01-01T12:00:00Z
         "400":
           description: Bad Request
   /product/getProductsBySearch:
@@ -313,6 +463,23 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ProductSearchResponse"
+              example:
+                status: success
+                data:
+                  - _id: 65f0d1c2a1b2c3d4e5f67891
+                    sku: SKU-001
+                    name: Basic Tee
+                    image: https://example.com/images/tee.jpg
+                    price: 19.99
+                    description: Soft cotton t-shirt.
+                    category:
+                      - tops
+                    status: active
+                    isDeleted: false
+                    createdAt: 2025-01-01T12:00:00Z
+                total: 1
+                totalPages: 1
+                page: 1
         "400":
           description: Bad Request
   /product/updateProductById/{id}:
@@ -340,6 +507,20 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ProductResponse"
+              example:
+                status: success
+                data:
+                  _id: 65f0d1c2a1b2c3d4e5f67891
+                  sku: SKU-001
+                  name: Basic Tee
+                  image: https://example.com/images/tee.jpg
+                  price: 19.99
+                  description: Soft cotton t-shirt.
+                  category:
+                    - tops
+                  status: active
+                  isDeleted: false
+                  createdAt: 2025-01-01T12:00:00Z
         "400":
           description: Bad Request
   /cart:
@@ -370,6 +551,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CartItemResponse"
+              example:
+                status: success
+                data:
+                  _id: 65f0d1c2a1b2c3d4e5f67892
+                  cartId: 65f0d1c2a1b2c3d4e5f67893
+                  productId: 65f0d1c2a1b2c3d4e5f67891
+                  size: M
+                  quantity: 2
         "400":
           description: Bad Request
     delete:
@@ -384,6 +573,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SuccessResponse"
+              example:
+                status: success
         "400":
           description: Bad Request
   /cart/item/{id}:
@@ -405,6 +596,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CartItemResponse"
+              example:
+                status: success
+                data:
+                  _id: 65f0d1c2a1b2c3d4e5f67892
+                  cartId: 65f0d1c2a1b2c3d4e5f67893
+                  productId: 65f0d1c2a1b2c3d4e5f67891
+                  size: M
+                  quantity: 2
         "400":
           description: Bad Request
   /cart/item:
@@ -432,6 +631,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CartItemResponse"
+              example:
+                status: success
+                data:
+                  _id: 65f0d1c2a1b2c3d4e5f67892
+                  cartId: 65f0d1c2a1b2c3d4e5f67893
+                  productId: 65f0d1c2a1b2c3d4e5f67891
+                  size: M
+                  quantity: 2
         "400":
           description: Bad Request
 
@@ -458,5 +665,15 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/OrderResponse"
+              example:
+                status: success
+                data:
+                  _id: 65f0d1c2a1b2c3d4e5f67894
+                  userId: 65f0d1c2a1b2c3d4e5f67890
+                  status: preparing
+                  orderId: OD12ab34cd5678
+                  totalPrice: 39.98
+                  shipTo: Seoul, KR
+                  createdAt: 2025-01-01T12:00:00Z
         "400":
           description: Bad Request
