@@ -1,6 +1,7 @@
 version: "3.9"
 services:
-  api:
+  shoppingMall-be:
+    image: ghcr.io/dgkim1/shoppingmall-be:latest
     build: .
     ports:
       - "5000:5000"
