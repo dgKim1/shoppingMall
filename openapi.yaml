@@ -161,6 +161,24 @@ components:
           productId: 65f0d1c2a1b2c3d4e5f67891
           size: M
           quantity: 2
+    CartItemListResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/CartItem"
+      example:
+        status: success
+        data:
+          - _id: 65f0d1c2a1b2c3d4e5f67892
+            cartId: 65f0d1c2a1b2c3d4e5f67893
+            productId: 65f0d1c2a1b2c3d4e5f67891
+            size: M
+            quantity: 2
     OrderResponse:
       type: object
       properties:
@@ -543,6 +561,28 @@ paths:
         "400":
           description: Bad Request
   /cart:
+    get:
+      summary: Get cart items
+      tags: [Cart]
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CartItemListResponse"
+              example:
+                status: success
+                data:
+                  - _id: 65f0d1c2a1b2c3d4e5f67892
+                    cartId: 65f0d1c2a1b2c3d4e5f67893
+                    productId: 65f0d1c2a1b2c3d4e5f67891
+                    size: M
+                    quantity: 2
+        "400":
+          description: Bad Request
     post:
       summary: Add item to cart
       tags: [Cart]
