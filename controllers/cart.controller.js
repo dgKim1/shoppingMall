@@ -49,6 +49,23 @@ cartController.addToCart = async (req, res) => {
   }
 };
 
+cartController.getCart = async (req, res) => {
+  try {
+    const { userId } = req;
+    const cart = await Cart.findOne({ userId });
+    if (!cart) {
+      return res.status(200).json({ status: "success", data: [] });
+    }
+
+    const cartItems = await CartItem.find({ cartId: cart._id }).populate(
+      "productId"
+    );
+    return res.status(200).json({ status: "success", data: cartItems });
+  } catch (error) {
+    res.status(400).json({ status: "fail", error: error.message });
+  }
+};
+
 cartController.removeCartItemById = async (req, res) => {
   try {
     const { userId } = req;
