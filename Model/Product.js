@@ -8,14 +8,18 @@ const productSchema = new Schema(
     image: { type: String, required: true },
     price: { type: Number, required: true },
     description: { type: String, required: true },
-    category: { type: Array, required: true },
+    category: {
+      type: [String],
+      enum: ["top", "bottom", "shoes"],
+      required: true,
+    },
     gender: {
       type: String,
       enum: ["남성", "여성", "남녀공용"],
     },
     brand: { type: String },
     color: {
-      type: String,
+      type: [String],
       enum: [
         "bg-black",
         "bg-white",
