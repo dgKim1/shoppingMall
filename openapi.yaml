@@ -546,15 +546,16 @@ paths:
                   - _id: 65f0d1c2a1b2c3d4e5f67891
                     sku: SKU-001
                     name: Basic Tee
-        image:
-          - https://example.com/images/tee.jpg
+                    image:
+                      - https://example.com/images/tee.jpg
                     price: 19.99
                     description: Soft cotton t-shirt.
                     category:
-                      - tops
-                    gender: 남녀공용
-                    brand: 나이키 스포츠웨어
-                    color: bg-black
+                      - top
+                    gender: unisex
+                    brand: Nike Sportswear
+                    color:
+                      - bg-black
                     status: active
                     isDeleted: false
                     createdAt: 2025-01-01T12:00:00Z
