@@ -80,7 +80,8 @@ components:
           _id: 65f0d1c2a1b2c3d4e5f67891
           sku: SKU-001
           name: Basic Tee
-          image: https://example.com/images/tee.jpg
+          image:
+            - https://example.com/images/tee.jpg
           price: 19.99
           description: Soft cotton t-shirt.
           category:
@@ -110,7 +111,8 @@ components:
           - _id: 65f0d1c2a1b2c3d4e5f67891
             sku: SKU-001
             name: Basic Tee
-            image: https://example.com/images/tee.jpg
+            image:
+              - https://example.com/images/tee.jpg
             price: 19.99
             description: Soft cotton t-shirt.
             category:
@@ -151,7 +153,8 @@ components:
           _id: 65f0d1c2a1b2c3d4e5f67891
           sku: SKU-001
           name: Basic Tee
-          image: https://example.com/images/tee.jpg
+          image:
+            - https://example.com/images/tee.jpg
           price: 19.99
           description: Soft cotton t-shirt.
           category:
@@ -169,7 +172,8 @@ components:
           - _id: 65f0d1c2a1b2c3d4e5f67891
             sku: SKU-001
             name: Basic Tee
-            image: https://example.com/images/tee.jpg
+            image:
+              - https://example.com/images/tee.jpg
             price: 19.99
             description: Soft cotton t-shirt.
             category:
@@ -263,7 +267,9 @@ components:
         name:
           type: string
         image:
-          type: string
+          type: array
+          items:
+            type: string
         price:
           type: number
         description:
@@ -302,7 +308,8 @@ components:
         _id: 65f0d1c2a1b2c3d4e5f67891
         sku: SKU-001
         name: Basic Tee
-        image: https://example.com/images/tee.jpg
+          image:
+            - https://example.com/images/tee.jpg
         price: 19.99
         description: Soft cotton t-shirt.
         category:
@@ -486,8 +493,10 @@ paths:
                   type: string
                 name:
                   type: string
-                image:
-                  type: string
+                  image:
+                    type: array
+                    items:
+                      type: string
                 price:
                   type: number
                 description:
@@ -537,7 +546,8 @@ paths:
                   - _id: 65f0d1c2a1b2c3d4e5f67891
                     sku: SKU-001
                     name: Basic Tee
-                    image: https://example.com/images/tee.jpg
+        image:
+          - https://example.com/images/tee.jpg
                     price: 19.99
                     description: Soft cotton t-shirt.
                     category:
@@ -583,7 +593,8 @@ paths:
                   - _id: 65f0d1c2a1b2c3d4e5f67891
                     sku: SKU-001
                     name: Basic Tee
-                    image: https://example.com/images/tee.jpg
+                      image:
+                        - https://example.com/images/tee.jpg
                     price: 19.99
                     description: Soft cotton t-shirt.
                     category:
@@ -630,7 +641,8 @@ paths:
                   _id: 65f0d1c2a1b2c3d4e5f67891
                   sku: SKU-001
                   name: Basic Tee
-                  image: https://example.com/images/tee.jpg
+                    image:
+                      - https://example.com/images/tee.jpg
                   price: 19.99
                   description: Soft cotton t-shirt.
                   category:
@@ -686,7 +698,8 @@ paths:
                   _id: 65f0d1c2a1b2c3d4e5f67891
                   sku: SKU-001
                   name: Basic Tee
-                  image: https://example.com/images/tee.jpg
+                    image:
+                      - https://example.com/images/tee.jpg
                   price: 19.99
                   description: Soft cotton t-shirt.
                   category:
