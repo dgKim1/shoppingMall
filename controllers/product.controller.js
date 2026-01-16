@@ -24,47 +24,58 @@ productController.createProduct = async(req,res)=>{
 }
 
 
-productController.getAllProducts = async(req,res)=>{
-    try{
-        const allProducts = await Product.find({});
-        return res.status(200).json({
-            status: "success", data: allProducts
-        })
+productController.getAllProducts = async (req, res) => {
+  try {
+    const { page = 1, limit = 12 } = req.query;
+    const pageNum = Math.max(parseInt(page, 10) || 1, 1);
+    const limitNum = Math.min(Math.max(parseInt(limit, 10) || 12, 1), 100);
+    const skip = (pageNum - 1) * limitNum;
 
-    }catch(error){
-    res.status(400).json({status:"fail",error:error.message})
-}
+    const [products, total] = await Promise.all([
+      Product.find({}).sort({ createdAt: -1 }).skip(skip).limit(limitNum),
+      Product.countDocuments({}),
+    ]);
 
-}
+    return res.status(200).json({
+      status: "success",
+      data: products,
+      total,
+      totalPages: Math.ceil(total / limitNum),
+      page: pageNum,
+    });
+  } catch (error) {
+    res.status(400).json({ status: "fail", error: error.message });
+  }
+};
 
 
-productController.getProductsBySearch = async(req,res)=>{
-    try{
-        const { name = "", page = 1 } = req.query;
-        const limit = 5;
-        const pageNum = Math.max(parseInt(page, 10) || 1, 1);
-        const filter = {};
-        if (name) {
-            filter.name = { $regex: name, $options: "i" };
-        }
-
-        const skip = (pageNum - 1) * limit;
-        const [productList, total] = await Promise.all([
-            productList.find(filter).skip(skip).limit(limit),
-            productList.countDocuments(filter),
-        ]);
-
-        return res.status(200).json({
-            status: "success",
-            data: products,
-            total,
-            totalPages: Math.ceil(total / limit),
-            page: pageNum,
-        });
-    }catch(error){
-        res.status(400).json({status:"fail",error:error.message})
+productController.getProductsBySearch = async (req, res) => {
+  try {
+    const { name = "", page = 1, limit = 12 } = req.query;
+    const pageNum = Math.max(parseInt(page, 10) || 1, 1);
+    const limitNum = Math.min(Math.max(parseInt(limit, 10) || 12, 1), 100);
+    const filter = {};
+    if (name) {
+      filter.name = { $regex: name, $options: "i" };
     }
-}
+
+    const skip = (pageNum - 1) * limitNum;
+    const [products, total] = await Promise.all([
+      Product.find(filter).sort({ createdAt: -1 }).skip(skip).limit(limitNum),
+      Product.countDocuments(filter),
+    ]);
+
+    return res.status(200).json({
+      status: "success",
+      data: products,
+      total,
+      totalPages: Math.ceil(total / limitNum),
+      page: pageNum,
+    });
+  } catch (error) {
+    res.status(400).json({ status: "fail", error: error.message });
+  }
+};
 
 productController.updateProductById = async (req, res) => {
     try {
