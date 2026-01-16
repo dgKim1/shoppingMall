@@ -2,26 +2,29 @@ const Product = require("../Model/Product");
 const ProductStock = require("../Model/ProductStock");
 const productController = {};
 
-productController.createProduct = async(req,res)=>{
-    try{
-    let {sku, name, image,price,description,category,status,isDeleted} = req.body;
-    const newProduct = new Product(
-        {sku,
-    name,
-    image,
-    price,
-    description,
-    category,
-    status,
-    isDeleted
-        }
-    )
+productController.createProduct = async (req, res) => {
+  try {
+    let { sku, name, image, price, description, category, status, isDeleted } =
+      req.body;
+    if (image && !Array.isArray(image)) {
+      image = [image];
+    }
+    const newProduct = new Product({
+      sku,
+      name,
+      image,
+      price,
+      description,
+      category,
+      status,
+      isDeleted,
+    });
     await newProduct.save();
     return res.status(200).json({ status: "success" });
-}catch(error){
-    res.status(400).json({status:"fail",error:error.message})
-}
-}
+  } catch (error) {
+    res.status(400).json({ status: "fail", error: error.message });
+  }
+};
 
 
 productController.getAllProducts = async (req, res) => {
@@ -78,21 +81,24 @@ productController.getProductsBySearch = async (req, res) => {
 };
 
 productController.updateProductById = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const updatedProduct = await Product.findByIdAndUpdate(
-            id,
-            req.body,
-            { new: true, runValidators: true }
-        );
-        if (!updatedProduct) {
-            throw new Error("product not found");
-        }
-        return res.status(200).json({ status: "success", data: updatedProduct });
-    } catch (error) {
-        res.status(400).json({ status: "fail", error: error.message });
+  try {
+    const { id } = req.params;
+    const update = { ...req.body };
+    if (update.image && !Array.isArray(update.image)) {
+      update.image = [update.image];
     }
-}
+    const updatedProduct = await Product.findByIdAndUpdate(id, update, {
+      new: true,
+      runValidators: true,
+    });
+    if (!updatedProduct) {
+      throw new Error("product not found");
+    }
+    return res.status(200).json({ status: "success", data: updatedProduct });
+  } catch (error) {
+    res.status(400).json({ status: "fail", error: error.message });
+  }
+};
 
 productController.getProductBySku = async (req, res) => {
   try {

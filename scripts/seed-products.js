@@ -6,7 +6,7 @@ const products = [
   {
     sku: "NS-TEE-001",
     name: "Sportswear Essential Tee",
-    image: "https://example.com/images/products/ns-tee-001.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/8/81/A_Pink_Bunny_with_bunny_candy_t-shirt_in_the_fashion_shop.jpg"],
     price: 109000,
     description: "Soft cotton tee with a relaxed fit.",
     category: ["top"],
@@ -19,7 +19,7 @@ const products = [
   {
     sku: "NS-TEE-002",
     name: "Sportswear Logo Tee",
-    image: "https://example.com/images/products/ns-tee-002.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/9/9d/A_boy_wearing_a_t-shirt_and_shorts.jpg"],
     price: 115000,
     description: "Everyday tee with bold logo graphics.",
     category: ["top"],
@@ -32,7 +32,7 @@ const products = [
   {
     sku: "NS-TEE-003",
     name: "Sportswear Club Tee",
-    image: "https://example.com/images/products/ns-tee-003.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/3/32/Ambigram_Ideal%2C_polysymmetrical_logo_printed_on_a_green_T-shirt.jpg"],
     price: 120000,
     description: "Lightweight tee for daily wear.",
     category: ["top"],
@@ -45,7 +45,7 @@ const products = [
   {
     sku: "NS-SWT-001",
     name: "Sportswear Fleece Crew",
-    image: "https://example.com/images/products/ns-swt-001.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/a/aa/Ambigram_Zen_Yes_text_with_meditation_pictogram%2C_embroidered_on_a_blue_T-shirt.jpg"],
     price: 149000,
     description: "Warm fleece crew for layering.",
     category: ["top"],
@@ -58,7 +58,7 @@ const products = [
   {
     sku: "NS-SWT-002",
     name: "Sportswear Club Hoodie",
-    image: "https://example.com/images/products/ns-swt-002.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/8/82/T-Shirt_Logo.png"],
     price: 159000,
     description: "Classic hoodie with soft brushed fleece.",
     category: ["top"],
@@ -71,7 +71,7 @@ const products = [
   {
     sku: "NS-SWT-003",
     name: "Sportswear Phoenix Hoodie",
-    image: "https://example.com/images/products/ns-swt-003.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/5/55/T-shirt.png"],
     price: 169000,
     description: "Oversized hoodie with premium feel.",
     category: ["top"],
@@ -84,7 +84,7 @@ const products = [
   {
     sku: "NS-JKT-001",
     name: "Sportswear Windrunner Jacket",
-    image: "https://example.com/images/products/ns-jkt-001.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/c/c9/T-shirt_%28drawing%29.jpg"],
     price: 179000,
     description: "Lightweight windrunner with iconic chevron.",
     category: ["top"],
@@ -97,7 +97,7 @@ const products = [
   {
     sku: "NS-JKT-002",
     name: "Sportswear Woven Jacket",
-    image: "https://example.com/images/products/ns-jkt-002.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/0/06/%22Vaccinated%22_hoodie_on_sale%2C_reference_to_COVID-19.jpg"],
     price: 189000,
     description: "Woven jacket for transitional weather.",
     category: ["top"],
@@ -110,7 +110,7 @@ const products = [
   {
     sku: "NS-PT-001",
     name: "Sportswear Club Joggers",
-    image: "https://example.com/images/products/ns-pt-001.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/5/50/Grupo_Jeans_Reencuentro.jpg"],
     price: 135000,
     description: "Comfort joggers with tapered legs.",
     category: ["bottom"],
@@ -123,7 +123,7 @@ const products = [
   {
     sku: "NS-PT-002",
     name: "Sportswear Woven Pants",
-    image: "https://example.com/images/products/ns-pt-002.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/5/54/High_waisted_jeans_1435042736.jpg"],
     price: 145000,
     description: "Durable woven pants with zip pockets.",
     category: ["bottom"],
@@ -136,7 +136,7 @@ const products = [
   {
     sku: "NS-PT-003",
     name: "Sportswear Track Pants",
-    image: "https://example.com/images/products/ns-pt-003.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/0/0e/Jeans_MET_1978.175.3_B.jpg"],
     price: 139000,
     description: "Track pants with a smooth finish.",
     category: ["bottom"],
@@ -149,7 +149,7 @@ const products = [
   {
     sku: "NL-TEE-001",
     name: "NikeLab Premium Tee",
-    image: "https://example.com/images/products/nl-tee-001.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/2/28/Atheists_hoodie.jpg"],
     price: 155000,
     description: "Premium tee with refined texture.",
     category: ["top"],
@@ -162,7 +162,7 @@ const products = [
   {
     sku: "NL-TEE-002",
     name: "NikeLab Minimal Tee",
-    image: "https://example.com/images/products/nl-tee-002.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/3/30/Max_Giesinger_-_2021-09-12_-_Mannheim_-_Sven_Mandel_-_1D_X_MK_II_-_0229_-_B70I3683_%28re-developed%29.jpg"],
     price: 165000,
     description: "Minimal tee with clean lines.",
     category: ["top"],
@@ -175,7 +175,7 @@ const products = [
   {
     sku: "NL-TEE-003",
     name: "NikeLab Cropped Tee",
-    image: "https://example.com/images/products/nl-tee-003.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/8/81/A_Pink_Bunny_with_bunny_candy_t-shirt_in_the_fashion_shop.jpg"],
     price: 160000,
     description: "Cropped tee with modern silhouette.",
     category: ["top"],
@@ -188,7 +188,7 @@ const products = [
   {
     sku: "NL-SWT-001",
     name: "NikeLab Crew Sweatshirt",
-    image: "https://example.com/images/products/nl-swt-001.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/9/9d/A_boy_wearing_a_t-shirt_and_shorts.jpg"],
     price: 175000,
     description: "Premium fleece crew with structured fit.",
     category: ["top"],
@@ -201,7 +201,7 @@ const products = [
   {
     sku: "NL-SWT-002",
     name: "NikeLab Zip Hoodie",
-    image: "https://example.com/images/products/nl-swt-002.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/3/32/Ambigram_Ideal%2C_polysymmetrical_logo_printed_on_a_green_T-shirt.jpg"],
     price: 190000,
     description: "Zip hoodie with clean paneling.",
     category: ["top"],
@@ -214,7 +214,7 @@ const products = [
   {
     sku: "NL-SWT-003",
     name: "NikeLab Oversized Hoodie",
-    image: "https://example.com/images/products/nl-swt-003.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/a/aa/Ambigram_Zen_Yes_text_with_meditation_pictogram%2C_embroidered_on_a_blue_T-shirt.jpg"],
     price: 195000,
     description: "Oversized hoodie with a plush feel.",
     category: ["top"],
@@ -227,7 +227,7 @@ const products = [
   {
     sku: "NL-JKT-001",
     name: "NikeLab Shell Jacket",
-    image: "https://example.com/images/products/nl-jkt-001.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/8/82/T-Shirt_Logo.png"],
     price: 199000,
     description: "Light shell jacket with subtle branding.",
     category: ["top"],
@@ -240,7 +240,7 @@ const products = [
   {
     sku: "NL-JKT-002",
     name: "NikeLab Packable Jacket",
-    image: "https://example.com/images/products/nl-jkt-002.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/5/55/T-shirt.png"],
     price: 185000,
     description: "Packable jacket for on-the-go wear.",
     category: ["top"],
@@ -253,7 +253,7 @@ const products = [
   {
     sku: "NL-PT-001",
     name: "NikeLab Knit Pants",
-    image: "https://example.com/images/products/nl-pt-001.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/2/2c/Jeans_crater_4006_h3.jpg"],
     price: 170000,
     description: "Knit pants with tapered fit.",
     category: ["bottom"],
@@ -266,7 +266,7 @@ const products = [
   {
     sku: "NL-PT-002",
     name: "NikeLab Woven Pants",
-    image: "https://example.com/images/products/nl-pt-002.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/9/99/Jeans_mexicanos.jpg"],
     price: 175000,
     description: "Woven pants with a clean finish.",
     category: ["bottom"],
@@ -279,7 +279,7 @@ const products = [
   {
     sku: "NL-PT-003",
     name: "NikeLab Utility Pants",
-    image: "https://example.com/images/products/nl-pt-003.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/9/9b/Recycled_thread_made_from_old_jeans%2C_on_display_in_Hikarie.jpg"],
     price: 180000,
     description: "Utility pants with functional pockets.",
     category: ["bottom"],
@@ -292,7 +292,7 @@ const products = [
   {
     sku: "NS-TEE-004",
     name: "Sportswear Air Tee",
-    image: "https://example.com/images/products/ns-tee-004.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/c/c9/T-shirt_%28drawing%29.jpg"],
     price: 129000,
     description: "Breathable tee with soft handfeel.",
     category: ["top"],
@@ -305,7 +305,7 @@ const products = [
   {
     sku: "NS-TEE-005",
     name: "Sportswear Utility Tee",
-    image: "https://example.com/images/products/ns-tee-005.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/0/06/%22Vaccinated%22_hoodie_on_sale%2C_reference_to_COVID-19.jpg"],
     price: 135000,
     description: "Utility tee with reinforced seams.",
     category: ["top"],
@@ -318,7 +318,7 @@ const products = [
   {
     sku: "NS-TEE-006",
     name: "Sportswear Relaxed Tee",
-    image: "https://example.com/images/products/ns-tee-006.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/2/28/Atheists_hoodie.jpg"],
     price: 119000,
     description: "Relaxed fit tee for everyday wear.",
     category: ["top"],
@@ -331,7 +331,7 @@ const products = [
   {
     sku: "NL-TEE-004",
     name: "NikeLab Lightweight Tee",
-    image: "https://example.com/images/products/nl-tee-004.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/3/30/Max_Giesinger_-_2021-09-12_-_Mannheim_-_Sven_Mandel_-_1D_X_MK_II_-_0229_-_B70I3683_%28re-developed%29.jpg"],
     price: 150000,
     description: "Lightweight tee with smooth texture.",
     category: ["top"],
@@ -344,7 +344,7 @@ const products = [
   {
     sku: "NL-TEE-005",
     name: "NikeLab Graphic Tee",
-    image: "https://example.com/images/products/nl-tee-005.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/8/81/A_Pink_Bunny_with_bunny_candy_t-shirt_in_the_fashion_shop.jpg"],
     price: 158000,
     description: "Graphic tee with a clean print.",
     category: ["top"],
@@ -357,7 +357,7 @@ const products = [
   {
     sku: "NL-TEE-006",
     name: "NikeLab Airy Tee",
-    image: "https://example.com/images/products/nl-tee-006.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/9/9d/A_boy_wearing_a_t-shirt_and_shorts.jpg"],
     price: 162000,
     description: "Airy tee with a soft drape.",
     category: ["top"],
@@ -370,7 +370,7 @@ const products = [
   {
     sku: "NS-SHOE-001",
     name: "Sportswear Court Classic",
-    image: "https://example.com/images/products/ns-shoe-001.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/6/69/2023_Adidas_Yeezy_350_V2_EF2905_%281%29.jpg"],
     price: 149000,
     description: "Everyday court sneaker with durable upper.",
     category: ["shoes"],
@@ -383,7 +383,7 @@ const products = [
   {
     sku: "NS-SHOE-002",
     name: "Sportswear Retro Runner",
-    image: "https://example.com/images/products/ns-shoe-002.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/2/2f/Avia_Shoes.jpg"],
     price: 159000,
     description: "Retro-inspired runner with cushioned ride.",
     category: ["shoes"],
@@ -396,7 +396,7 @@ const products = [
   {
     sku: "NS-SHOE-003",
     name: "Sportswear City Trainer",
-    image: "https://example.com/images/products/ns-shoe-003.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/a/a5/Black_Converse_sneakers.JPG"],
     price: 169000,
     description: "Light trainer built for urban commutes.",
     category: ["shoes"],
@@ -409,7 +409,7 @@ const products = [
   {
     sku: "NL-SHOE-001",
     name: "NikeLab Mono Trainer",
-    image: "https://example.com/images/products/nl-shoe-001.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/7/76/FILA_FLOAT_MAXXI_and_FILA_AXILUS_ACE_in_Brazil.jpg"],
     price: 189000,
     description: "Minimal trainer with refined silhouette.",
     category: ["shoes"],
@@ -422,7 +422,7 @@ const products = [
   {
     sku: "NL-SHOE-002",
     name: "NikeLab Studio Runner",
-    image: "https://example.com/images/products/nl-shoe-002.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/f/f0/Reebok_Royal_Glide_Ripple_Clip_shoe.jpg"],
     price: 195000,
     description: "Studio runner with premium materials.",
     category: ["shoes"],
@@ -435,7 +435,7 @@ const products = [
   {
     sku: "NL-SHOE-003",
     name: "NikeLab Flex Slip-On",
-    image: "https://example.com/images/products/nl-shoe-003.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/f/f2/Vans_sneakers_and_socks.jpg"],
     price: 175000,
     description: "Slip-on shoe with flexible comfort.",
     category: ["shoes"],
@@ -448,7 +448,7 @@ const products = [
   {
     sku: "NS-TEE-007",
     name: "Sportswear Heritage Tee",
-    image: "https://example.com/images/products/ns-tee-007.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/3/32/Ambigram_Ideal%2C_polysymmetrical_logo_printed_on_a_green_T-shirt.jpg"],
     price: 112000,
     description: "Heritage logo tee with soft finish.",
     category: ["top"],
@@ -461,7 +461,7 @@ const products = [
   {
     sku: "NS-TEE-008",
     name: "Sportswear Air Knit Tee",
-    image: "https://example.com/images/products/ns-tee-008.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/a/aa/Ambigram_Zen_Yes_text_with_meditation_pictogram%2C_embroidered_on_a_blue_T-shirt.jpg"],
     price: 118000,
     description: "Breathable knit tee for all-day wear.",
     category: ["top"],
@@ -474,7 +474,7 @@ const products = [
   {
     sku: "NS-TEE-009",
     name: "Sportswear Essential Rib Tee",
-    image: "https://example.com/images/products/ns-tee-009.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/8/82/T-Shirt_Logo.png"],
     price: 121000,
     description: "Ribbed tee with a clean silhouette.",
     category: ["top"],
@@ -487,7 +487,7 @@ const products = [
   {
     sku: "NS-TEE-010",
     name: "Sportswear Pocket Tee",
-    image: "https://example.com/images/products/ns-tee-010.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/5/55/T-shirt.png"],
     price: 125000,
     description: "Pocket tee with reinforced stitching.",
     category: ["top"],
@@ -500,7 +500,7 @@ const products = [
   {
     sku: "NS-TEE-011",
     name: "Sportswear Vintage Tee",
-    image: "https://example.com/images/products/ns-tee-011.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/c/c9/T-shirt_%28drawing%29.jpg"],
     price: 128000,
     description: "Vintage-washed tee with soft drape.",
     category: ["top"],
@@ -513,7 +513,7 @@ const products = [
   {
     sku: "NS-TEE-012",
     name: "Sportswear Washed Tee",
-    image: "https://example.com/images/products/ns-tee-012.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/0/06/%22Vaccinated%22_hoodie_on_sale%2C_reference_to_COVID-19.jpg"],
     price: 130000,
     description: "Washed tee with a relaxed fit.",
     category: ["top"],
@@ -526,7 +526,7 @@ const products = [
   {
     sku: "NS-TEE-013",
     name: "Sportswear Contrast Tee",
-    image: "https://example.com/images/products/ns-tee-013.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/2/28/Atheists_hoodie.jpg"],
     price: 132000,
     description: "Contrast stitching tee with clean finish.",
     category: ["top"],
@@ -539,7 +539,7 @@ const products = [
   {
     sku: "NS-TEE-014",
     name: "Sportswear Relaxed Logo Tee",
-    image: "https://example.com/images/products/ns-tee-014.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/3/30/Max_Giesinger_-_2021-09-12_-_Mannheim_-_Sven_Mandel_-_1D_X_MK_II_-_0229_-_B70I3683_%28re-developed%29.jpg"],
     price: 134000,
     description: "Relaxed logo tee with oversized fit.",
     category: ["top"],
@@ -552,7 +552,7 @@ const products = [
   {
     sku: "NS-TEE-015",
     name: "Sportswear Soft Tee",
-    image: "https://example.com/images/products/ns-tee-015.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/8/81/A_Pink_Bunny_with_bunny_candy_t-shirt_in_the_fashion_shop.jpg"],
     price: 136000,
     description: "Soft-hand tee with light stretch.",
     category: ["top"],
@@ -565,7 +565,7 @@ const products = [
   {
     sku: "NS-TEE-016",
     name: "Sportswear Utility Pocket Tee",
-    image: "https://example.com/images/products/ns-tee-016.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/9/9d/A_boy_wearing_a_t-shirt_and_shorts.jpg"],
     price: 138000,
     description: "Utility pocket tee with durable fabric.",
     category: ["top"],
@@ -578,7 +578,7 @@ const products = [
   {
     sku: "NS-SWT-004",
     name: "Sportswear Loopback Crew",
-    image: "https://example.com/images/products/ns-swt-004.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/3/32/Ambigram_Ideal%2C_polysymmetrical_logo_printed_on_a_green_T-shirt.jpg"],
     price: 145000,
     description: "Loopback crew with smooth texture.",
     category: ["top"],
@@ -591,7 +591,7 @@ const products = [
   {
     sku: "NS-SWT-005",
     name: "Sportswear Fleece Hoodie",
-    image: "https://example.com/images/products/ns-swt-005.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/a/aa/Ambigram_Zen_Yes_text_with_meditation_pictogram%2C_embroidered_on_a_blue_T-shirt.jpg"],
     price: 155000,
     description: "Cozy hoodie for cool weather.",
     category: ["top"],
@@ -604,7 +604,7 @@ const products = [
   {
     sku: "NS-SWT-006",
     name: "Sportswear Crop Crew",
-    image: "https://example.com/images/products/ns-swt-006.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/8/82/T-Shirt_Logo.png"],
     price: 149000,
     description: "Cropped crew with modern cut.",
     category: ["top"],
@@ -617,7 +617,7 @@ const products = [
   {
     sku: "NS-SWT-007",
     name: "Sportswear Zip Hoodie",
-    image: "https://example.com/images/products/ns-swt-007.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/5/55/T-shirt.png"],
     price: 165000,
     description: "Full-zip hoodie with soft fleece.",
     category: ["top"],
@@ -630,7 +630,7 @@ const products = [
   {
     sku: "NS-SWT-008",
     name: "Sportswear Oversized Crew",
-    image: "https://example.com/images/products/ns-swt-008.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/c/c9/T-shirt_%28drawing%29.jpg"],
     price: 158000,
     description: "Oversized crew with premium feel.",
     category: ["top"],
@@ -643,7 +643,7 @@ const products = [
   {
     sku: "NS-SWT-009",
     name: "Sportswear Cozy Hoodie",
-    image: "https://example.com/images/products/ns-swt-009.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/0/06/%22Vaccinated%22_hoodie_on_sale%2C_reference_to_COVID-19.jpg"],
     price: 162000,
     description: "Cozy hoodie with brushed interior.",
     category: ["top"],
@@ -656,7 +656,7 @@ const products = [
   {
     sku: "NS-PT-004",
     name: "Sportswear Fleece Joggers",
-    image: "https://example.com/images/products/ns-pt-004.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/d/d5/Women%27s_Levi%27s_jeans_inside_out.jpg"],
     price: 139000,
     description: "Fleece joggers with rib cuffs.",
     category: ["bottom"],
@@ -669,7 +669,7 @@ const products = [
   {
     sku: "NS-PT-005",
     name: "Sportswear Straight Pants",
-    image: "https://example.com/images/products/ns-pt-005.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/b/b3/Back_side_Chino_trousers_with_welt_pocket.jpg"],
     price: 145000,
     description: "Straight-leg pants with clean lines.",
     category: ["bottom"],
@@ -682,7 +682,7 @@ const products = [
   {
     sku: "NS-PT-006",
     name: "Sportswear Woven Wide Pants",
-    image: "https://example.com/images/products/ns-pt-006.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/5/5f/Cotton_Trousers_of_salem.jpg"],
     price: 148000,
     description: "Wide pants with lightweight woven fabric.",
     category: ["bottom"],
@@ -695,7 +695,7 @@ const products = [
   {
     sku: "NS-PT-007",
     name: "Sportswear Tech Joggers",
-    image: "https://example.com/images/products/ns-pt-007.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/3/30/Max_Giesinger_-_2021-09-12_-_Mannheim_-_Sven_Mandel_-_1D_X_MK_II_-_0229_-_B70I3683_%28re-developed%29.jpg"],
     price: 152000,
     description: "Tech joggers with zip pockets.",
     category: ["bottom"],
@@ -708,7 +708,7 @@ const products = [
   {
     sku: "NS-PT-008",
     name: "Sportswear Cargo Pants",
-    image: "https://example.com/images/products/ns-pt-008.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/5/50/Grupo_Jeans_Reencuentro.jpg"],
     price: 158000,
     description: "Cargo pants with utility pockets.",
     category: ["bottom"],
@@ -721,7 +721,7 @@ const products = [
   {
     sku: "NS-PT-009",
     name: "Sportswear Knit Pants",
-    image: "https://example.com/images/products/ns-pt-009.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/5/54/High_waisted_jeans_1435042736.jpg"],
     price: 150000,
     description: "Knit pants with smooth drape.",
     category: ["bottom"],
@@ -734,7 +734,7 @@ const products = [
   {
     sku: "NS-SHOE-004",
     name: "Sportswear Street Low",
-    image: "https://example.com/images/products/ns-shoe-004.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/8/8b/Asics_Gel-Cumulus_22.jpg"],
     price: 155000,
     description: "Low-profile sneaker for street wear.",
     category: ["shoes"],
@@ -747,7 +747,7 @@ const products = [
   {
     sku: "NS-SHOE-005",
     name: "Sportswear Trail Runner",
-    image: "https://example.com/images/products/ns-shoe-005.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/b/b8/Mizuno_Wave_Ibuki_2.jpg"],
     price: 172000,
     description: "Trail runner with durable outsole.",
     category: ["shoes"],
@@ -760,7 +760,7 @@ const products = [
   {
     sku: "NS-SHOE-006",
     name: "Sportswear City Slip",
-    image: "https://example.com/images/products/ns-shoe-006.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/a/a6/Sneaker.png"],
     price: 149000,
     description: "Slip-on shoe for everyday comfort.",
     category: ["shoes"],
@@ -773,7 +773,7 @@ const products = [
   {
     sku: "NS-SHOE-007",
     name: "Sportswear Classic Runner",
-    image: "https://example.com/images/products/ns-shoe-007.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/4/4a/Sneakers%2C_Cockroaches_and_Broken_Bottles_%28Tenis_Graffiti-Lalone%29.jpg"],
     price: 165000,
     description: "Classic runner with cushioned midsole.",
     category: ["shoes"],
@@ -786,7 +786,7 @@ const products = [
   {
     sku: "NS-SHOE-008",
     name: "Sportswear Aero Trainer",
-    image: "https://example.com/images/products/ns-shoe-008.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/6/69/2023_Adidas_Yeezy_350_V2_EF2905_%281%29.jpg"],
     price: 178000,
     description: "Lightweight trainer with airy mesh.",
     category: ["shoes"],
@@ -799,7 +799,7 @@ const products = [
   {
     sku: "NL-TEE-007",
     name: "NikeLab Studio Tee",
-    image: "https://example.com/images/products/nl-tee-007.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/2/28/Atheists_hoodie.jpg"],
     price: 155000,
     description: "Studio tee with premium jersey.",
     category: ["top"],
@@ -812,7 +812,7 @@ const products = [
   {
     sku: "NL-TEE-008",
     name: "NikeLab Precision Tee",
-    image: "https://example.com/images/products/nl-tee-008.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/3/30/Max_Giesinger_-_2021-09-12_-_Mannheim_-_Sven_Mandel_-_1D_X_MK_II_-_0229_-_B70I3683_%28re-developed%29.jpg"],
     price: 160000,
     description: "Precision fit tee with smooth texture.",
     category: ["top"],
@@ -825,7 +825,7 @@ const products = [
   {
     sku: "NL-TEE-009",
     name: "NikeLab Soft Draped Tee",
-    image: "https://example.com/images/products/nl-tee-009.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/8/81/A_Pink_Bunny_with_bunny_candy_t-shirt_in_the_fashion_shop.jpg"],
     price: 158000,
     description: "Draped tee with refined feel.",
     category: ["top"],
@@ -838,7 +838,7 @@ const products = [
   {
     sku: "NL-TEE-010",
     name: "NikeLab Modern Tee",
-    image: "https://example.com/images/products/nl-tee-010.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/9/9d/A_boy_wearing_a_t-shirt_and_shorts.jpg"],
     price: 162000,
     description: "Modern tee with clean lines.",
     category: ["top"],
@@ -851,7 +851,7 @@ const products = [
   {
     sku: "NL-TEE-011",
     name: "NikeLab Panel Tee",
-    image: "https://example.com/images/products/nl-tee-011.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/3/32/Ambigram_Ideal%2C_polysymmetrical_logo_printed_on_a_green_T-shirt.jpg"],
     price: 165000,
     description: "Panelled tee with minimal branding.",
     category: ["top"],
@@ -864,7 +864,7 @@ const products = [
   {
     sku: "NL-TEE-012",
     name: "NikeLab Airflow Tee",
-    image: "https://example.com/images/products/nl-tee-012.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/a/aa/Ambigram_Zen_Yes_text_with_meditation_pictogram%2C_embroidered_on_a_blue_T-shirt.jpg"],
     price: 168000,
     description: "Airflow tee with lightweight knit.",
     category: ["top"],
@@ -877,7 +877,7 @@ const products = [
   {
     sku: "NL-SWT-004",
     name: "NikeLab Structured Crew",
-    image: "https://example.com/images/products/nl-swt-004.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/8/82/T-Shirt_Logo.png"],
     price: 185000,
     description: "Structured crew with premium finish.",
     category: ["top"],
@@ -890,7 +890,7 @@ const products = [
   {
     sku: "NL-SWT-005",
     name: "NikeLab Minimal Hoodie",
-    image: "https://example.com/images/products/nl-swt-005.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/5/55/T-shirt.png"],
     price: 195000,
     description: "Minimal hoodie with clean paneling.",
     category: ["top"],
@@ -903,7 +903,7 @@ const products = [
   {
     sku: "NL-SWT-006",
     name: "NikeLab Crop Hoodie",
-    image: "https://example.com/images/products/nl-swt-006.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/c/c9/T-shirt_%28drawing%29.jpg"],
     price: 188000,
     description: "Cropped hoodie with soft fleece.",
     category: ["top"],
@@ -916,7 +916,7 @@ const products = [
   {
     sku: "NL-SWT-007",
     name: "NikeLab Zip Crew",
-    image: "https://example.com/images/products/nl-swt-007.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/0/06/%22Vaccinated%22_hoodie_on_sale%2C_reference_to_COVID-19.jpg"],
     price: 192000,
     description: "Zip crew with sleek silhouette.",
     category: ["top"],
@@ -929,7 +929,7 @@ const products = [
   {
     sku: "NL-SWT-008",
     name: "NikeLab Plush Hoodie",
-    image: "https://example.com/images/products/nl-swt-008.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/2/28/Atheists_hoodie.jpg"],
     price: 198000,
     description: "Plush hoodie with premium handfeel.",
     category: ["top"],
@@ -942,7 +942,7 @@ const products = [
   {
     sku: "NL-PT-004",
     name: "NikeLab Tapered Pants",
-    image: "https://example.com/images/products/nl-pt-004.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/0/0e/Jeans_MET_1978.175.3_B.jpg"],
     price: 175000,
     description: "Tapered pants with refined structure.",
     category: ["bottom"],
@@ -955,7 +955,7 @@ const products = [
   {
     sku: "NL-PT-005",
     name: "NikeLab Tech Pants",
-    image: "https://example.com/images/products/nl-pt-005.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/2/2c/Jeans_crater_4006_h3.jpg"],
     price: 182000,
     description: "Tech pants with hidden pockets.",
     category: ["bottom"],
@@ -968,7 +968,7 @@ const products = [
   {
     sku: "NL-PT-006",
     name: "NikeLab Wide Pants",
-    image: "https://example.com/images/products/nl-pt-006.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/9/99/Jeans_mexicanos.jpg"],
     price: 178000,
     description: "Wide pants with smooth drape.",
     category: ["bottom"],
@@ -981,7 +981,7 @@ const products = [
   {
     sku: "NL-PT-007",
     name: "NikeLab Knit Joggers",
-    image: "https://example.com/images/products/nl-pt-007.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/9/9b/Recycled_thread_made_from_old_jeans%2C_on_display_in_Hikarie.jpg"],
     price: 170000,
     description: "Knit joggers with soft touch.",
     category: ["bottom"],
@@ -994,7 +994,7 @@ const products = [
   {
     sku: "NL-PT-008",
     name: "NikeLab Utility Pants",
-    image: "https://example.com/images/products/nl-pt-008.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/d/d5/Women%27s_Levi%27s_jeans_inside_out.jpg"],
     price: 185000,
     description: "Utility pants with clean cut.",
     category: ["bottom"],
@@ -1007,7 +1007,7 @@ const products = [
   {
     sku: "NL-SHOE-004",
     name: "NikeLab Motion Runner",
-    image: "https://example.com/images/products/nl-shoe-004.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/2/2f/Avia_Shoes.jpg"],
     price: 199000,
     description: "Motion runner with refined cushioning.",
     category: ["shoes"],
@@ -1020,7 +1020,7 @@ const products = [
   {
     sku: "NL-SHOE-005",
     name: "NikeLab Studio Trainer",
-    image: "https://example.com/images/products/nl-shoe-005.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/a/a5/Black_Converse_sneakers.JPG"],
     price: 205000,
     description: "Studio trainer with premium mesh.",
     category: ["shoes"],
@@ -1033,7 +1033,7 @@ const products = [
   {
     sku: "NL-SHOE-006",
     name: "NikeLab Minimal Slip",
-    image: "https://example.com/images/products/nl-shoe-006.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/7/76/FILA_FLOAT_MAXXI_and_FILA_AXILUS_ACE_in_Brazil.jpg"],
     price: 188000,
     description: "Minimal slip-on with sleek profile.",
     category: ["shoes"],
@@ -1046,7 +1046,7 @@ const products = [
   {
     sku: "NL-SHOE-007",
     name: "NikeLab Aero Low",
-    image: "https://example.com/images/products/nl-shoe-007.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/f/f0/Reebok_Royal_Glide_Ripple_Clip_shoe.jpg"],
     price: 192000,
     description: "Aero low sneaker with airy knit.",
     category: ["shoes"],
@@ -1059,7 +1059,7 @@ const products = [
   {
     sku: "NL-SHOE-008",
     name: "NikeLab City Runner",
-    image: "https://example.com/images/products/nl-shoe-008.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/f/f2/Vans_sneakers_and_socks.jpg"],
     price: 198000,
     description: "City runner with smooth ride.",
     category: ["shoes"],
@@ -1072,7 +1072,7 @@ const products = [
   {
     sku: "NL-SHOE-009",
     name: "NikeLab Flex Trainer",
-    image: "https://example.com/images/products/nl-shoe-009.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/8/8b/Asics_Gel-Cumulus_22.jpg"],
     price: 185000,
     description: "Flexible trainer with light support.",
     category: ["shoes"],
@@ -1085,7 +1085,7 @@ const products = [
   {
     sku: "NL-SHOE-010",
     name: "NikeLab Court Clean",
-    image: "https://example.com/images/products/nl-shoe-010.jpg",
+    image: ["https://upload.wikimedia.org/wikipedia/commons/b/b8/Mizuno_Wave_Ibuki_2.jpg"],
     price: 190000,
     description: "Clean court sneaker with minimal branding.",
     category: ["shoes"],
