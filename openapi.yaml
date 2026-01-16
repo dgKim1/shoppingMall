@@ -98,6 +98,12 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Product"
+        total:
+          type: integer
+        totalPages:
+          type: integer
+        page:
+          type: integer
       example:
         status: success
         data:
@@ -112,6 +118,9 @@ components:
             status: active
             isDeleted: false
             createdAt: 2025-01-01T12:00:00Z
+        total: 120
+        totalPages: 10
+        page: 1
     ProductSearchResponse:
       type: object
       properties:
@@ -237,6 +246,22 @@ components:
           type: array
           items:
             type: string
+        gender:
+          type: string
+          enum: [남성, 여성, 남녀공용]
+        brand:
+          type: string
+        color:
+          type: string
+          enum:
+            - bg-black
+            - bg-white
+            - bg-red-500
+            - bg-emerald-500
+            - bg-sky-500
+            - bg-amber-500
+            - bg-slate-400
+            - bg-lime-500
         status:
           type: string
         isDeleted:
@@ -253,6 +278,9 @@ components:
         description: Soft cotton t-shirt.
         category:
           - tops
+        gender: 남녀공용
+        brand: 나이키 스포츠웨어
+        color: bg-black
         status: active
         isDeleted: false
         createdAt: 2025-01-01T12:00:00Z
@@ -457,6 +485,15 @@ paths:
     get:
       summary: Get all products
       tags: [Product]
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+        - in: query
+          name: limit
+          schema:
+            type: integer
       responses:
         "200":
           description: OK
@@ -475,9 +512,15 @@ paths:
                     description: Soft cotton t-shirt.
                     category:
                       - tops
+                    gender: 남녀공용
+                    brand: 나이키 스포츠웨어
+                    color: bg-black
                     status: active
                     isDeleted: false
                     createdAt: 2025-01-01T12:00:00Z
+                total: 120
+                totalPages: 10
+                page: 1
         "400":
           description: Bad Request
   /product/getProductsBySearch:
@@ -491,6 +534,10 @@ paths:
             type: string
         - in: query
           name: page
+          schema:
+            type: integer
+        - in: query
+          name: limit
           schema:
             type: integer
       responses:
@@ -511,6 +558,9 @@ paths:
                     description: Soft cotton t-shirt.
                     category:
                       - tops
+                    gender: 남녀공용
+                    brand: 나이키 스포츠웨어
+                    color: bg-black
                     status: active
                     isDeleted: false
                     createdAt: 2025-01-01T12:00:00Z
