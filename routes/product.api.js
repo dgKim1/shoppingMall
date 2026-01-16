@@ -8,6 +8,7 @@ router.post("/createProdcut",authController.authenticate,
 
 router.get("/getAllProducts", productController.getAllProducts);
 router.get("/getProductsBySearch", productController.getProductsBySearch);
+router.get("/getProductBySku/:sku", productController.getProductBySku);
 router.put("/updateProductById/:id", authController.authenticate, authController.checkAdminPermission, productController.updateProductById);
 
 

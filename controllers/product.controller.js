@@ -94,6 +94,22 @@ productController.updateProductById = async (req, res) => {
     }
 }
 
+productController.getProductBySku = async (req, res) => {
+  try {
+    const { sku } = req.params;
+    if (!sku) {
+      throw new Error("sku is required");
+    }
+    const product = await Product.findOne({ sku });
+    if (!product) {
+      throw new Error("product not found");
+    }
+    return res.status(200).json({ status: "success", data: product });
+  } catch (error) {
+    res.status(400).json({ status: "fail", error: error.message });
+  }
+};
+
 productController.checkAndDecreaseStock = async (productId, size, quantity) => {
     const qty = Math.max(parseInt(quantity, 10) || 1, 1);
     const stock = await ProductStock.findOneAndUpdate(
