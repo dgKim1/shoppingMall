@@ -137,6 +137,32 @@ components:
           type: integer
         page:
           type: integer
+    ProductSkuResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        data:
+          $ref: "#/components/schemas/Product"
+      example:
+        status: success
+        data:
+          _id: 65f0d1c2a1b2c3d4e5f67891
+          sku: SKU-001
+          name: Basic Tee
+          image: https://example.com/images/tee.jpg
+          price: 19.99
+          description: Soft cotton t-shirt.
+          category:
+            - top
+          gender: 남녀공용
+          brand: 나이키 스포츠웨어
+          color:
+            - bg-black
+          status: active
+          isDeleted: false
+          createdAt: 2025-01-01T12:00:00Z
       example:
         status: success
         data:
@@ -635,6 +661,43 @@ paths:
                     productId: 65f0d1c2a1b2c3d4e5f67891
                     size: M
                     quantity: 2
+        "400":
+          description: Bad Request
+  /product/getProductBySku/{sku}:
+    get:
+      summary: Get product by sku
+      tags: [Product]
+      parameters:
+        - in: path
+          name: sku
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductSkuResponse"
+              example:
+                status: success
+                data:
+                  _id: 65f0d1c2a1b2c3d4e5f67891
+                  sku: SKU-001
+                  name: Basic Tee
+                  image: https://example.com/images/tee.jpg
+                  price: 19.99
+                  description: Soft cotton t-shirt.
+                  category:
+                    - top
+                  gender: 남녀공용
+                  brand: 나이키 스포츠웨어
+                  color:
+                    - bg-black
+                  status: active
+                  isDeleted: false
+                  createdAt: 2025-01-01T12:00:00Z
         "400":
           description: Bad Request
     post:
