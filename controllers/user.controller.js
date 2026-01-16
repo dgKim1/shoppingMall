@@ -1,9 +1,17 @@
 const User = require("../Model/User");
+const Cart = require("../Model/Cart");
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
 const { OAuth2Client } = require("google-auth-library");
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 const userController = {};
+
+const ensureCartForUser = async (userId) => {
+  const existing = await Cart.findOne({ userId });
+  if (!existing) {
+    await Cart.create({ userId });
+  }
+};
 
 //회원 가입
 userController.createUser = async (req, res) => {
@@ -22,6 +30,7 @@ userController.createUser = async (req, res) => {
       role: role ? role : "customer",
     });
     await newUser.save();
+    await ensureCartForUser(newUser._id);
     return res.status(200).json({ status: "success" });
   } catch (error) {
     res.status(400).json({ status: "fail", error: error.message });
@@ -79,6 +88,7 @@ userController.loginWithGoogle = async (req, res) => {
       await user.save();
     }
 
+    await ensureCartForUser(user._id);
     const token = await user.generateToken();
     return res.status(200).json({ status: "success", user, token });
   } catch (error) {
