@@ -246,22 +246,25 @@ components:
           type: array
           items:
             type: string
+            enum: [top, bottom, shoes]
         gender:
           type: string
           enum: [남성, 여성, 남녀공용]
         brand:
           type: string
         color:
-          type: string
-          enum:
-            - bg-black
-            - bg-white
-            - bg-red-500
-            - bg-emerald-500
-            - bg-sky-500
-            - bg-amber-500
-            - bg-slate-400
-            - bg-lime-500
+          type: array
+          items:
+            type: string
+            enum:
+              - bg-black
+              - bg-white
+              - bg-red-500
+              - bg-emerald-500
+              - bg-sky-500
+              - bg-amber-500
+              - bg-slate-400
+              - bg-lime-500
         status:
           type: string
         isDeleted:
@@ -277,10 +280,11 @@ components:
         price: 19.99
         description: Soft cotton t-shirt.
         category:
-          - tops
+          - top
         gender: 남녀공용
         brand: 나이키 스포츠웨어
-        color: bg-black
+        color:
+          - bg-black
         status: active
         isDeleted: false
         createdAt: 2025-01-01T12:00:00Z
