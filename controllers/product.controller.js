@@ -39,7 +39,7 @@ productController.createProduct = async (req, res) => {
 
 productController.getAllProducts = async (req, res) => {
   try {
-    const { page = 1, limit = 12, sort } = req.query;
+    const { page = 1, limit = 12, sort, categoryMain, categorySub } = req.query;
     const pageNum = Math.max(parseInt(page, 10) || 1, 1);
     const limitNum = Math.min(Math.max(parseInt(limit, 10) || 12, 1), 100);
     const skip = (pageNum - 1) * limitNum;
@@ -55,20 +55,27 @@ productController.getAllProducts = async (req, res) => {
         sortOption = { price: -1 };
         break;
       case "추천순":
-        sortOption = { createdAt: -1 };
+        sortOption = { sales: -1 };
         break;
       default:
         sortOption = null;
         break;
     }
 
-    const productQuery = Product.find({}).skip(skip).limit(limitNum);
+    const filter = {};
+    if (categoryMain) {
+      filter.categoryMain = categoryMain;
+    }
+    if (categorySub) {
+      filter.categorySub = categorySub;
+    }
+    const productQuery = Product.find(filter).skip(skip).limit(limitNum);
     if (sortOption) {
       productQuery.sort(sortOption);
     }
     const [products, total] = await Promise.all([
       productQuery,
-      Product.countDocuments({}),
+      Product.countDocuments(filter),
     ]);
 
     return res.status(200).json({
