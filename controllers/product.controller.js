@@ -39,7 +39,8 @@ productController.createProduct = async (req, res) => {
 
 productController.getAllProducts = async (req, res) => {
   try {
-    const { page = 1, limit = 12, sort, categoryMain, categorySub } = req.query;
+    const { page = 1, limit = 12, sort, categoryMain, categorySub, personType } =
+      req.query;
     const pageNum = Math.max(parseInt(page, 10) || 1, 1);
     const limitNum = Math.min(Math.max(parseInt(limit, 10) || 12, 1), 100);
     const skip = (pageNum - 1) * limitNum;
@@ -68,6 +69,9 @@ productController.getAllProducts = async (req, res) => {
     }
     if (categorySub) {
       filter.categorySub = categorySub;
+    }
+    if (personType) {
+      filter.personType = personType;
     }
     const productQuery = Product.find(filter).skip(skip).limit(limitNum);
     if (sortOption) {

@@ -36,6 +36,10 @@ const productSchema = new Schema(
       type: String,
       enum: ["남성", "여성", "남녀공용"],
     },
+    personType: {
+      type: String,
+      enum: ["Men", "Women", "Kid"],
+    },
     brand: { type: String },
     color: {
       type: [String],
