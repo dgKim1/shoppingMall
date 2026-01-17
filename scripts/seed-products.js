@@ -43,10 +43,10 @@ const colors = [
   "bg-slate-400",
   "bg-lime-500",
 ];
-const brands = ["\\uB098\\uC774\\uD0A4 \\uC2A4\\uD3EC\\uCE20\\uC6E8\\uC5B4", "NikeLab"];
+const brands = ["\나\이\키 \스\포\츠\웨\어", "NikeLab"];
 const personTypes = ["Men", "Women", "Kid"];
-const genderByPersonType = {"Men": "\\uB0A8\\uC131", "Women": "\\uC5EC\\uC131", "Kid": "\\uB0A8\\uB140\\uACF5\\uC6A9"};
-const categoryMap = {"\\uC758\\uB958": ["\\uC544\\uC6B0\\uD130", "\\uC0C1\\uC758", "\\uD558\\uC758", "\\uD2B8\\uB808\\uC774\\uB2DD"], "\\uC2E0\\uBC1C": ["\\uC2A4\\uB2C8\\uCEE4\\uC988", "\\uB7EC\\uB2DD", "\\uB18D\\uAD6C", "\\uC2AC\\uB9AC\\uD37C"], "\\uC561\\uC138\\uC11C\\uB9AC": ["\\uBAA8\\uC790", "\\uAC00\\uBC29", "\\uC591\\uB9D0", "\\uC7A5\\uAC11"]};
+const genderByPersonType = {"Men": "\남\성", "Women": "\여\성", "Kid": "\남\녀\공\용"};
+const categoryMap = {"\의\류": ["\아\우\터", "\상\의", "\하\의", "\트\레\이\닝"], "\신\발": ["\스\니\커\즈", "\러\닝", "\농\구", "\슬\리\퍼"], "\액\세\서\리": ["\모\자", "\가\방", "\양\말", "\장\갑"]};
 
 const pickImages = () => {
   const first = imagePool[Math.floor(Math.random() * imagePool.length)];

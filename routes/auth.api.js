@@ -6,5 +6,6 @@ const userController = require("../controllers/user.controller")
 //회원가입
 router.post("/login", authController.loginWithEmail);
 router.post("/google", userController.loginWithGoogle);
+router.post("/logout", authController.authenticate, authController.logout);
 
 module.exports= router;
