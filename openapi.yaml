@@ -533,6 +533,11 @@ paths:
           name: limit
           schema:
             type: integer
+        - in: query
+          name: sort
+          schema:
+            type: string
+            enum: [추천순, 신상품, 가격 낮은순, 가격 높은순]
       responses:
         "200":
           description: OK
@@ -581,6 +586,11 @@ paths:
           name: limit
           schema:
             type: integer
+        - in: query
+          name: sort
+          schema:
+            type: string
+            enum: [추천순, 신상품, 가격 낮은순, 가격 높은순]
       responses:
         "200":
           description: OK
