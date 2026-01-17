@@ -523,7 +523,15 @@ paths:
           name: sort
           schema:
             type: string
-            enum: ["???", "???", "?? ???", "?? ???"]
+            enum: ["추천순", "신상품", "가격 낮은순", "가격 높은순"]
+        - in: query
+          name: categoryMain
+          schema:
+            type: string
+        - in: query
+          name: categorySub
+          schema:
+            type: string
       responses:
         "200":
           description: OK
