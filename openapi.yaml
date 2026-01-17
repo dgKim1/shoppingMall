@@ -84,8 +84,8 @@ components:
             - https://example.com/images/tee.jpg
           price: 19.99
           description: Soft cotton t-shirt.
-          categoryMain: "\uC758\uB958"
-          categorySub: "\uC0C1\uC758"
+          categoryMain: "의류"
+          categorySub: "상의"
           status: active
           isDeleted: false
           createdAt: 2025-01-01T12:00:00Z
@@ -115,8 +115,8 @@ components:
               - https://example.com/images/tee.jpg
             price: 19.99
             description: Soft cotton t-shirt.
-            categoryMain: "\uC758\uB958"
-            categorySub: "\uC0C1\uC758"
+            categoryMain: "의류"
+            categorySub: "상의"
             status: active
             isDeleted: false
             createdAt: 2025-01-01T12:00:00Z
@@ -157,9 +157,9 @@ components:
             - https://example.com/images/tee.jpg
           price: 19.99
           description: Soft cotton t-shirt.
-          categoryMain: "\uC758\uB958"
-          categorySub: "\uC0C1\uC758"
-          gender: 남녀공용
+          categoryMain: "의류"
+          categorySub: "상의"
+          gender: "남녀공용"
           brand: 나이키 스포츠웨어
           color:
             - bg-black
@@ -176,8 +176,8 @@ components:
               - https://example.com/images/tee.jpg
             price: 19.99
             description: Soft cotton t-shirt.
-            categoryMain: "\uC758\uB958"
-            categorySub: "\uC0C1\uC758"
+            categoryMain: "의류"
+            categorySub: "상의"
             status: active
             isDeleted: false
             createdAt: 2025-01-01T12:00:00Z
@@ -276,13 +276,13 @@ components:
           type: string
         categoryMain:
           type: string
-          enum: ["\uC758\uB958", "\uC2E0\uBC1C", "\uC561\uC138\uC11C\uB9AC"]
+          enum: ['의류', '신발', '액세서리']
         categorySub:
           type: string
-          enum: ["\uC544\uC6B0\uD130", "\uC0C1\uC758", "\uD558\uC758", "\uD2B8\uB808\uC774\uB2DD", "\uC2A4\uB2C8\uCEE4\uC988", "\uB7EC\uB2DD", "\uB18D\uAD6C", "\uC2AC\uB9AC\uD37C", "\uBAA8\uC790", "\uAC00\uBC29", "\uC591\uB9D0", "\uC7A5\uAC11"]
+          enum: ['아우터', '상의', '하의', '트레이닝', '스니커즈', '러닝', '농구', '슬리퍼', '모자', '가방', '양말', '장갑']
         gender:
           type: string
-          enum: ["\uB0A8\uC131", "\uC5EC\uC131", "\uB0A8\uB140\uACF5\uC6A9"]
+          enum: ['남성', '여성', '남녀공용']
         brand:
           type: string
         color:
@@ -315,10 +315,10 @@ components:
         description: Soft cotton t-shirt.
         categoryMain:
           type: string
-          enum: ["\uC758\uB958", "\uC2E0\uBC1C", "\uC561\uC138\uC11C\uB9AC"]
+          enum: ['의류', '신발', '액세서리']
         categorySub:
           type: string
-          enum: ["\uC544\uC6B0\uD130", "\uC0C1\uC758", "\uD558\uC758", "\uD2B8\uB808\uC774\uB2DD", "\uC2A4\uB2C8\uCEE4\uC988", "\uB7EC\uB2DD", "\uB18D\uAD6C", "\uC2AC\uB9AC\uD37C", "\uBAA8\uC790", "\uAC00\uBC29", "\uC591\uB9D0", "\uC7A5\uAC11"]
+          enum: ['아우터', '상의', '하의', '트레이닝', '스니커즈', '러닝', '농구', '슬리퍼', '모자', '가방', '양말', '장갑']
         color:
           - bg-black
         status: active
@@ -548,7 +548,7 @@ paths:
           name: sort
           schema:
             type: string
-            enum: [추천순, 신상품, 가격 낮은순, 가격 높은순]
+            enum: ['추천순', '신상품', '가격 낮은순', '가격 높은순']
       responses:
         "200":
           description: OK
@@ -566,9 +566,9 @@ paths:
                       - https://example.com/images/tee.jpg
                     price: 19.99
                     description: Soft cotton t-shirt.
-                    categoryMain: "\uC758\uB958"
-                    categorySub: "\uC0C1\uC758"
-                    gender: unisex
+                    categoryMain: "의류"
+                    categorySub: "상의"
+                    gender: "남녀공용"
                     brand: Nike Sportswear
                     color:
                       - bg-black
@@ -601,7 +601,7 @@ paths:
           name: sort
           schema:
             type: string
-            enum: [추천순, 신상품, 가격 낮은순, 가격 높은순]
+            enum: ['추천순', '신상품', '가격 낮은순', '가격 높은순']
       responses:
         "200":
           description: OK
@@ -619,9 +619,9 @@ paths:
                         - https://example.com/images/tee.jpg
                     price: 19.99
                     description: Soft cotton t-shirt.
-                    categoryMain: "\uC758\uB958"
-                    categorySub: "\uC0C1\uC758"
-                    gender: 남녀공용
+                    categoryMain: "의류"
+                    categorySub: "상의"
+                    gender: "남녀공용"
                     brand: 나이키 스포츠웨어
                     color: bg-black
                     status: active
@@ -667,8 +667,8 @@ paths:
                       - https://example.com/images/tee.jpg
                   price: 19.99
                   description: Soft cotton t-shirt.
-                  categoryMain: "\uC758\uB958"
-                  categorySub: "\uC0C1\uC758"
+                  categoryMain: "의류"
+                  categorySub: "상의"
                   status: active
                   isDeleted: false
                   createdAt: 2025-01-01T12:00:00Z
@@ -724,9 +724,9 @@ paths:
                       - https://example.com/images/tee.jpg
                   price: 19.99
                   description: Soft cotton t-shirt.
-                  categoryMain: "\uC758\uB958"
-                  categorySub: "\uC0C1\uC758"
-                  gender: 남녀공용
+                  categoryMain: "의류"
+                  categorySub: "상의"
+                  gender: "남녀공용"
                   brand: 나이키 스포츠웨어
                   color:
                     - bg-black
