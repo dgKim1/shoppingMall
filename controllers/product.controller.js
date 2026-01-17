@@ -4,8 +4,17 @@ const productController = {};
 
 productController.createProduct = async (req, res) => {
   try {
-    let { sku, name, image, price, description, category, status, isDeleted } =
-      req.body;
+    let {
+      sku,
+      name,
+      image,
+      price,
+      description,
+      categoryMain,
+      categorySub,
+      status,
+      isDeleted,
+    } = req.body;
     if (image && !Array.isArray(image)) {
       image = [image];
     }
@@ -15,7 +24,8 @@ productController.createProduct = async (req, res) => {
       image,
       price,
       description,
-      category,
+      categoryMain,
+      categorySub,
       status,
       isDeleted,
     });

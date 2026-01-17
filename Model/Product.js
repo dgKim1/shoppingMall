@@ -8,9 +8,27 @@ const productSchema = new Schema(
     image: { type: [String], required: true },
     price: { type: Number, required: true },
     description: { type: String, required: true },
-    category: {
-      type: [String],
-      enum: ["top", "bottom", "shoes"],
+    categoryMain: {
+      type: String,
+      enum: ["의류", "신발", "액세서리"],
+      required: true,
+    },
+    categorySub: {
+      type: String,
+      enum: [
+        "아우터",
+        "상의",
+        "하의",
+        "트레이닝",
+        "스니커즈",
+        "러닝",
+        "농구",
+        "슬리퍼",
+        "모자",
+        "가방",
+        "양말",
+        "장갑",
+      ],
       required: true,
     },
     gender: {
