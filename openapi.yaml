@@ -83,6 +83,7 @@ components:
           image:
             - https://example.com/images/tee.jpg
           price: 19.99
+          sales: 0
           description: Soft cotton t-shirt.
           categoryMain: "의류"
           categorySub: "상의"
@@ -114,6 +115,7 @@ components:
             image:
               - https://example.com/images/tee.jpg
             price: 19.99
+            sales: 0
             description: Soft cotton t-shirt.
             categoryMain: "의류"
             categorySub: "상의"
@@ -156,6 +158,7 @@ components:
           image:
             - https://example.com/images/tee.jpg
           price: 19.99
+          sales: 0
           description: Soft cotton t-shirt.
           categoryMain: "의류"
           categorySub: "상의"
@@ -175,6 +178,7 @@ components:
             image:
               - https://example.com/images/tee.jpg
             price: 19.99
+            sales: 0
             description: Soft cotton t-shirt.
             categoryMain: "의류"
             categorySub: "상의"
@@ -272,17 +276,19 @@ components:
             type: string
         price:
           type: number
+        sales:
+          type: number
         description:
           type: string
         categoryMain:
           type: string
-          enum: ['의류', '신발', '액세서리']
+          enum: ["??", "??", "????"]
         categorySub:
           type: string
-          enum: ['아우터', '상의', '하의', '트레이닝', '스니커즈', '러닝', '농구', '슬리퍼', '모자', '가방', '양말', '장갑']
+          enum: ["???", "??", "??", "????", "????", "??", "??", "???", "??", "??", "??", "??"]
         gender:
           type: string
-          enum: ['남성', '여성', '남녀공용']
+          enum: ["??", "??", "????"]
         brand:
           type: string
         color:
@@ -309,16 +315,15 @@ components:
         _id: 65f0d1c2a1b2c3d4e5f67891
         sku: SKU-001
         name: Basic Tee
-          image:
-            - https://example.com/images/tee.jpg
+        image:
+          - https://example.com/images/tee.jpg
         price: 19.99
+        sales: 0
         description: Soft cotton t-shirt.
-        categoryMain:
-          type: string
-          enum: ['의류', '신발', '액세서리']
-        categorySub:
-          type: string
-          enum: ['아우터', '상의', '하의', '트레이닝', '스니커즈', '러닝', '농구', '슬리퍼', '모자', '가방', '양말', '장갑']
+        categoryMain: "??"
+        categorySub: "??"
+        gender: "????"
+        brand: Nike Sportswear
         color:
           - bg-black
         status: active
@@ -389,22 +394,11 @@ paths:
                   type: string
       responses:
         "200":
-          description: OK
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/AuthLoginResponse"
-              example:
-                status: success
-                user:
-                  _id: 65f0d1c2a1b2c3d4e5f67890
-                  email: user@example.com
-                  name: Jane Doe
-                  role: customer
-                  createdAt: 2025-01-01T12:00:00Z
-                token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.example.signature
         "400":
-          description: Bad Request
   /auth/google:
     post:
       summary: Login with Google
@@ -421,9 +415,7 @@ paths:
                   type: string
       responses:
         "200":
-          description: OK
         "400":
-          description: Bad Request
   /user:
     post:
       summary: Create user
@@ -441,21 +433,16 @@ paths:
                   format: email
                 password:
                   type: string
-                name:
                   type: string
                 role:
                   type: string
       responses:
         "200":
-          description: OK
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/SuccessResponse"
-              example:
-                status: success
         "400":
-          description: Bad Request
   /user/me:
     get:
       summary: Get current user
@@ -464,21 +451,11 @@ paths:
         - bearerAuth: []
       responses:
         "200":
-          description: OK
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/UserResponse"
-              example:
-                status: success
-                user:
-                  _id: 65f0d1c2a1b2c3d4e5f67890
-                  email: user@example.com
-                  name: Jane Doe
-                  role: customer
-                  createdAt: 2025-01-01T12:00:00Z
         "400":
-          description: Bad Request
   /product/createProdcut:
     post:
       summary: Create product (admin)
@@ -502,6 +479,8 @@ paths:
                     type: string
                 price:
                   type: number
+                sales:
+                  type: number
                 description:
                   type: string
                 categoryMain:
@@ -522,15 +501,11 @@ paths:
                   type: boolean
       responses:
         "200":
-          description: OK
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/SuccessResponse"
-              example:
-                status: success
         "400":
-          description: Bad Request
   /product/getAllProducts:
     get:
       summary: Get all products
@@ -548,7 +523,7 @@ paths:
           name: sort
           schema:
             type: string
-            enum: ['추천순', '신상품', '가격 낮은순', '가격 높은순']
+            enum: ["???", "???", "?? ???", "?? ???"]
       responses:
         "200":
           description: OK
@@ -556,28 +531,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ProductListResponse"
-              example:
-                status: success
-                data:
-                  - _id: 65f0d1c2a1b2c3d4e5f67891
-                    sku: SKU-001
-                    name: Basic Tee
-                    image:
-                      - https://example.com/images/tee.jpg
-                    price: 19.99
-                    description: Soft cotton t-shirt.
-                    categoryMain: "의류"
-                    categorySub: "상의"
-                    gender: "남녀공용"
-                    brand: Nike Sportswear
-                    color:
-                      - bg-black
-                    status: active
-                    isDeleted: false
-                    createdAt: 2025-01-01T12:00:00Z
-                total: 120
-                totalPages: 10
-                page: 1
         "400":
           description: Bad Request
   /product/getProductsBySearch:
@@ -601,7 +554,7 @@ paths:
           name: sort
           schema:
             type: string
-            enum: ['추천순', '신상품', '가격 낮은순', '가격 높은순']
+            enum: ["???", "???", "?? ???", "?? ???"]
       responses:
         "200":
           description: OK
@@ -609,27 +562,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ProductSearchResponse"
-              example:
-                status: success
-                data:
-                  - _id: 65f0d1c2a1b2c3d4e5f67891
-                    sku: SKU-001
-                    name: Basic Tee
-                      image:
-                        - https://example.com/images/tee.jpg
-                    price: 19.99
-                    description: Soft cotton t-shirt.
-                    categoryMain: "의류"
-                    categorySub: "상의"
-                    gender: "남녀공용"
-                    brand: 나이키 스포츠웨어
-                    color: bg-black
-                    status: active
-                    isDeleted: false
-                    createdAt: 2025-01-01T12:00:00Z
-                total: 1
-                totalPages: 1
-                page: 1
         "400":
           description: Bad Request
   /product/updateProductById/{id}:
@@ -657,21 +589,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ProductResponse"
-              example:
-                status: success
-                data:
-                  _id: 65f0d1c2a1b2c3d4e5f67891
-                  sku: SKU-001
-                  name: Basic Tee
-                    image:
-                      - https://example.com/images/tee.jpg
-                  price: 19.99
-                  description: Soft cotton t-shirt.
-                  categoryMain: "의류"
-                  categorySub: "상의"
-                  status: active
-                  isDeleted: false
-                  createdAt: 2025-01-01T12:00:00Z
         "400":
           description: Bad Request
   /cart:
@@ -687,52 +604,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CartItemListResponse"
-              example:
-                status: success
-                data:
-                  - _id: 65f0d1c2a1b2c3d4e5f67892
-                    cartId: 65f0d1c2a1b2c3d4e5f67893
-                    productId: 65f0d1c2a1b2c3d4e5f67891
-                    size: M
-                    quantity: 2
-        "400":
-          description: Bad Request
-  /product/getProductBySku/{sku}:
-    get:
-      summary: Get product by sku
-      tags: [Product]
-      parameters:
-        - in: path
-          name: sku
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProductSkuResponse"
-              example:
-                status: success
-                data:
-                  _id: 65f0d1c2a1b2c3d4e5f67891
-                  sku: SKU-001
-                  name: Basic Tee
-                    image:
-                      - https://example.com/images/tee.jpg
-                  price: 19.99
-                  description: Soft cotton t-shirt.
-                  categoryMain: "의류"
-                  categorySub: "상의"
-                  gender: "남녀공용"
-                  brand: 나이키 스포츠웨어
-                  color:
-                    - bg-black
-                  status: active
-                  isDeleted: false
-                  createdAt: 2025-01-01T12:00:00Z
         "400":
           description: Bad Request
     post:
@@ -762,14 +633,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CartItemResponse"
-              example:
-                status: success
-                data:
-                  _id: 65f0d1c2a1b2c3d4e5f67892
-                  cartId: 65f0d1c2a1b2c3d4e5f67893
-                  productId: 65f0d1c2a1b2c3d4e5f67891
-                  size: M
-                  quantity: 2
         "400":
           description: Bad Request
     delete:
@@ -784,8 +647,25 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SuccessResponse"
-              example:
-                status: success
+        "400":
+          description: Bad Request
+  /product/getProductBySku/{sku}:
+    get:
+      summary: Get product by sku
+      tags: [Product]
+      parameters:
+        - in: path
+          name: sku
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductSkuResponse"
         "400":
           description: Bad Request
   /cart/item/{id}:
@@ -807,19 +687,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CartItemResponse"
-              example:
-                status: success
-                data:
-                  _id: 65f0d1c2a1b2c3d4e5f67892
-                  cartId: 65f0d1c2a1b2c3d4e5f67893
-                  productId: 65f0d1c2a1b2c3d4e5f67891
-                  size: M
-                  quantity: 2
         "400":
           description: Bad Request
   /cart/item:
     delete:
-      summary: Remove cart item by product and size
+      summary: Remove cart item by product
       tags: [Cart]
       security:
         - bearerAuth: []
@@ -842,17 +714,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CartItemResponse"
-              example:
-                status: success
-                data:
-                  _id: 65f0d1c2a1b2c3d4e5f67892
-                  cartId: 65f0d1c2a1b2c3d4e5f67893
-                  productId: 65f0d1c2a1b2c3d4e5f67891
-                  size: M
-                  quantity: 2
         "400":
           description: Bad Request
-
   /order:
     post:
       summary: Create order from cart

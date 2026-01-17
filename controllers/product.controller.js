@@ -55,7 +55,7 @@ productController.getAllProducts = async (req, res) => {
         sortOption = { price: -1 };
         break;
       case "추천순":
-        sortOption = { createdAt: -1 };
+        sortOption = { sales: -1 };
         break;
       default:
         sortOption = null;
