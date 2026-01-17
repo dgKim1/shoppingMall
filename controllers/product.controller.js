@@ -29,13 +29,35 @@ productController.createProduct = async (req, res) => {
 
 productController.getAllProducts = async (req, res) => {
   try {
-    const { page = 1, limit = 12 } = req.query;
+    const { page = 1, limit = 12, sort } = req.query;
     const pageNum = Math.max(parseInt(page, 10) || 1, 1);
     const limitNum = Math.min(Math.max(parseInt(limit, 10) || 12, 1), 100);
     const skip = (pageNum - 1) * limitNum;
+    let sortOption = null;
+    switch (sort) {
+      case "신상품":
+        sortOption = { createdAt: -1 };
+        break;
+      case "가격 낮은순":
+        sortOption = { price: 1 };
+        break;
+      case "가격 높은순":
+        sortOption = { price: -1 };
+        break;
+      case "추천순":
+        sortOption = { createdAt: -1 };
+        break;
+      default:
+        sortOption = null;
+        break;
+    }
 
+    const productQuery = Product.find({}).skip(skip).limit(limitNum);
+    if (sortOption) {
+      productQuery.sort(sortOption);
+    }
     const [products, total] = await Promise.all([
-      Product.find({}).sort({ createdAt: -1 }).skip(skip).limit(limitNum),
+      productQuery,
       Product.countDocuments({}),
     ]);
 
@@ -54,7 +76,7 @@ productController.getAllProducts = async (req, res) => {
 
 productController.getProductsBySearch = async (req, res) => {
   try {
-    const { name = "", page = 1, limit = 12 } = req.query;
+    const { name = "", page = 1, limit = 12, sort } = req.query;
     const pageNum = Math.max(parseInt(page, 10) || 1, 1);
     const limitNum = Math.min(Math.max(parseInt(limit, 10) || 12, 1), 100);
     const filter = {};
@@ -63,8 +85,30 @@ productController.getProductsBySearch = async (req, res) => {
     }
 
     const skip = (pageNum - 1) * limitNum;
+    let sortOption = null;
+    switch (sort) {
+      case "신상품":
+        sortOption = { createdAt: -1 };
+        break;
+      case "가격 낮은순":
+        sortOption = { price: 1 };
+        break;
+      case "가격 높은순":
+        sortOption = { price: -1 };
+        break;
+      case "추천순":
+        sortOption = { createdAt: -1 };
+        break;
+      default:
+        sortOption = null;
+        break;
+    }
+    const productQuery = Product.find(filter).skip(skip).limit(limitNum);
+    if (sortOption) {
+      productQuery.sort(sortOption);
+    }
     const [products, total] = await Promise.all([
-      Product.find(filter).sort({ createdAt: -1 }).skip(skip).limit(limitNum),
+      productQuery,
       Product.countDocuments(filter),
     ]);
 
