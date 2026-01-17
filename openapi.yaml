@@ -289,6 +289,9 @@ components:
         gender:
           type: string
           enum: ["??", "??", "????"]
+        personType:
+          type: string
+          enum: ["Men", "Women", "Kid"]
         brand:
           type: string
         color:
@@ -323,6 +326,7 @@ components:
         categoryMain: "??"
         categorySub: "??"
         gender: "????"
+        personType: "Men"
         brand: Nike Sportswear
         color:
           - bg-black
@@ -532,6 +536,11 @@ paths:
           name: categorySub
           schema:
             type: string
+        - in: query
+          name: personType
+          schema:
+            type: string
+            enum: ["Men", "Women", "Kid"]
       responses:
         "200":
           description: OK
