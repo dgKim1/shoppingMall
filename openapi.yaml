@@ -419,7 +419,30 @@ paths:
                   type: string
       responses:
         "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthLoginResponse"
         "400":
+          description: Bad Request
+  /auth/logout:
+    post:
+      summary: Logout
+      tags: [Auth]
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+              example:
+                status: success
+        "400":
+          description: Bad Request
   /user:
     post:
       summary: Create user
