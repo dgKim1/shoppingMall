@@ -15,6 +15,8 @@ tags:
     description: Order management
   - name: Cart
     description: Cart management
+  - name: Wishlist
+    description: Wishlist management
 components:
   securitySchemes:
     bearerAuth:
@@ -203,6 +205,7 @@ components:
           cartId: 65f0d1c2a1b2c3d4e5f67893
           productId: 65f0d1c2a1b2c3d4e5f67891
           size: M
+          color: bg-black
           quantity: 2
     CartItemListResponse:
       type: object
@@ -221,7 +224,54 @@ components:
             cartId: 65f0d1c2a1b2c3d4e5f67893
             productId: 65f0d1c2a1b2c3d4e5f67891
             size: M
+            color: bg-black
             quantity: 2
+    WishlistResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        data:
+          $ref: "#/components/schemas/Product"
+      example:
+        status: success
+        data:
+          _id: 65f0d1c2a1b2c3d4e5f67891
+          sku: SKU-001
+          name: Basic Tee
+          image:
+            - https://example.com/images/tee.jpg
+          price: 19.99
+          sales: 0
+          description: Soft cotton t-shirt.
+          status: active
+          isDeleted: false
+          createdAt: 2025-01-01T12:00:00Z
+    WishlistListResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Product"
+      example:
+        status: success
+        data:
+          - _id: 65f0d1c2a1b2c3d4e5f67891
+            sku: SKU-001
+            name: Basic Tee
+            image:
+              - https://example.com/images/tee.jpg
+            price: 19.99
+            sales: 0
+            description: Soft cotton t-shirt.
+            status: active
+            isDeleted: false
+            createdAt: 2025-01-01T12:00:00Z
     OrderResponse:
       type: object
       properties:
@@ -344,6 +394,8 @@ components:
           type: string
         size:
           type: string
+        color:
+          type: string
         quantity:
           type: integer
       example:
@@ -351,6 +403,7 @@ components:
         cartId: 65f0d1c2a1b2c3d4e5f67893
         productId: 65f0d1c2a1b2c3d4e5f67891
         size: M
+        color: bg-black
         quantity: 2
     Order:
       type: object
@@ -657,11 +710,13 @@ paths:
           application/json:
             schema:
               type: object
-              required: [productId, size]
+              required: [productId, size, color]
               properties:
                 productId:
                   type: string
                 size:
+                  type: string
+                color:
                   type: string
                 quantity:
                   type: integer
@@ -741,11 +796,13 @@ paths:
           application/json:
             schema:
               type: object
-              required: [productId, size]
+              required: [productId, size, color]
               properties:
                 productId:
                   type: string
                 size:
+                  type: string
+                color:
                   type: string
       responses:
         "200":
@@ -754,6 +811,69 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CartItemResponse"
+        "400":
+          description: Bad Request
+  /wishlist:
+    get:
+      summary: Get wishlist
+      tags: [Wishlist]
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WishlistListResponse"
+        "400":
+          description: Bad Request
+    post:
+      summary: Add to wishlist
+      tags: [Wishlist]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [productId]
+              properties:
+                productId:
+                  type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WishlistResponse"
+        "400":
+          description: Bad Request
+    delete:
+      summary: Remove from wishlist
+      tags: [Wishlist]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [productId]
+              properties:
+                productId:
+                  type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WishlistListResponse"
         "400":
           description: Bad Request
   /order:

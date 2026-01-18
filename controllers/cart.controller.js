@@ -7,10 +7,10 @@ const cartController = {};
 cartController.addToCart = async (req, res) => {
   try {
     const { userId } = req;
-    const { productId, size, quantity = 1 } = req.body;
+    const { productId, size, color, quantity = 1 } = req.body;
 
-    if (!productId || !size) {
-      throw new Error("productId and size are required");
+    if (!productId || !size || !color) {
+      throw new Error("productId, size, and color are required");
     }
 
     const qty = Math.max(parseInt(quantity, 10) || 1, 1);
@@ -29,6 +29,7 @@ cartController.addToCart = async (req, res) => {
       cartId: cart._id,
       productId,
       size,
+      color,
     });
 
     if (cartItem) {
@@ -39,6 +40,7 @@ cartController.addToCart = async (req, res) => {
         cartId: cart._id,
         productId,
         size,
+        color,
         quantity: qty,
       });
     }
@@ -94,10 +96,10 @@ cartController.removeCartItemById = async (req, res) => {
 cartController.removeCartItemByProduct = async (req, res) => {
   try {
     const { userId } = req;
-    const { productId, size } = req.body;
+    const { productId, size, color } = req.body;
 
-    if (!productId || !size) {
-      throw new Error("productId and size are required");
+    if (!productId || !size || !color) {
+      throw new Error("productId, size, and color are required");
     }
 
     const cart = await Cart.findOne({ userId });
@@ -109,6 +111,7 @@ cartController.removeCartItemByProduct = async (req, res) => {
       cartId: cart._id,
       productId,
       size,
+      color,
     });
 
     if (!deletedItem) {
