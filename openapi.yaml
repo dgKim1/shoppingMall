@@ -586,6 +586,45 @@ paths:
                       - bg-amber-500
                       - bg-slate-400
                       - bg-lime-500
+                stocks:
+                  type: array
+                  description: Stock entries must use colors included in Product.color.
+                  items:
+                    type: object
+                    required: [size, color, quantity]
+                    properties:
+                      size:
+                        type: string
+                        enum:
+                          - "235"
+                          - "240"
+                          - "245"
+                          - "250"
+                          - "255"
+                          - "260"
+                          - "265"
+                          - "270"
+                          - "275"
+                          - "280"
+                          - "285"
+                          - S
+                          - M
+                          - L
+                          - XL
+                          - XXL
+                      color:
+                        type: string
+                        enum:
+                          - bg-black
+                          - bg-white
+                          - bg-red-500
+                          - bg-emerald-500
+                          - bg-sky-500
+                          - bg-amber-500
+                          - bg-slate-400
+                          - bg-lime-500
+                      quantity:
+                        type: integer
                 status:
                   type: string
                 isDeleted:
