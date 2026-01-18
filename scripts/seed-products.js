@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const Product = require("../Model/Product");
+const ProductStock = require("../Model/ProductStock");
+const { getAllowedSizes, normalizeSize } = require("../utils/sizeRules");
 require("dotenv").config();
 
 const imagePool = [
@@ -43,10 +45,10 @@ const colors = [
   "bg-slate-400",
   "bg-lime-500",
 ];
-const brands = ["\나\이\키 \스\포\츠\웨\어", "NikeLab"];
+const brands = ["나이키 스포츠웨어", "NikeLab"];
 const personTypes = ["Men", "Women", "Kid"];
-const genderByPersonType = {"Men": "\남\성", "Women": "\여\성", "Kid": "\남\녀\공\용"};
-const categoryMap = {"\의\류": ["\아\우\터", "\상\의", "\하\의", "\트\레\이\닝"], "\신\발": ["\스\니\커\즈", "\러\닝", "\농\구", "\슬\리\퍼"], "\액\세\서\리": ["\모\자", "\가\방", "\양\말", "\장\갑"]};
+const genderByPersonType = {"Men": "남성", "Women": "여성", "Kid": "남녀공용"};
+const categoryMap = {"의류": ["아우터", "상의", "하의", "트레이닝"], "신발": ["스니커즈", "러닝", "농구", "슬리퍼"], "액세서리": ["모자", "가방", "양말", "장갑"]};
 
 const pickImages = () => {
   const first = imagePool[Math.floor(Math.random() * imagePool.length)];
@@ -110,6 +112,24 @@ const seed = async () => {
   }));
 
   const result = await Product.bulkWrite(ops, { ordered: false });
+  const seededSkus = products.map((p) => p.sku);
+  const dbProducts = await Product.find({ sku: { $in: seededSkus } });
+  const stockDocs = [];
+  for (const prod of dbProducts) {
+    const sizes = getAllowedSizes(prod.categoryMain).map((s) => normalizeSize(s));
+    for (const size of sizes) {
+      stockDocs.push({
+        productId: prod._id,
+        size,
+        quantity: Math.floor(Math.random() * 50) + 1,
+      });
+    }
+  }
+  if (stockDocs.length > 0) {
+    await ProductStock.deleteMany({ productId: { $in: dbProducts.map((p) => p._id) } });
+    await ProductStock.insertMany(stockDocs);
+  }
+
   const upserts = result.upsertedCount || 0;
   const inserted = result.insertedCount || 0;
   console.log(`seeded products: upserted=${upserts}, inserted=${inserted}`);
