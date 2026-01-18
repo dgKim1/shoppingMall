@@ -28,6 +28,7 @@ cartController.addToCart = async (req, res) => {
     const stock = await ProductStock.findOne({
       productId,
       size: normalizedSize,
+      color,
       quantity: { $gte: qty },
     });
     if (!stock) {

@@ -40,6 +40,7 @@ orderController.createOrder = async (req, res) => {
         await productController.checkAndDecreaseStock(
           item.productId,
           item.size,
+          item.color,
           item.quantity
         );
 
@@ -55,6 +56,7 @@ orderController.createOrder = async (req, res) => {
         productId: item.productId,
         productName: product.name,
         size: item.size,
+        color: item.color,
         price: product.price,
         quantity: item.quantity,
       });

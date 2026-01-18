@@ -14,6 +14,7 @@ const productStockSchema = new Schema({
     enum: [...APPAREL_SIZES, ...ACCESSORY_SIZES, ...SHOE_SIZES],
     required: true,
   },
+  color: { type: String, required: true },
   quantity: { type: Number, required: true },
 });
 

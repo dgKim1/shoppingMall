@@ -13,12 +13,19 @@ productController.createProduct = async (req, res) => {
       description,
       categoryMain,
       categorySub,
+      color,
       status,
       isDeleted,
       stocks = [],
     } = req.body;
     if (image && !Array.isArray(image)) {
       image = [image];
+    }
+    if (color && !Array.isArray(color)) {
+      color = [color];
+    }
+    if (!color || color.length === 0) {
+      throw new Error("color is required");
     }
     const newProduct = new Product({
       sku,
@@ -28,6 +35,7 @@ productController.createProduct = async (req, res) => {
       description,
       categoryMain,
       categorySub,
+      color,
       status,
       isDeleted,
     });
@@ -38,9 +46,16 @@ productController.createProduct = async (req, res) => {
         if (!isSizeAllowed(categoryMain, normalizedSize)) {
           throw new Error("invalid size for category");
         }
+        const stockColor =
+          stock.color ||
+          (Array.isArray(color) && color.length === 1 ? color[0] : null);
+        if (!stockColor) {
+          throw new Error("color is required for stock");
+        }
         return {
           productId: newProduct._id,
           size: normalizedSize,
+          color: stockColor,
           quantity: Math.max(parseInt(stock.quantity, 10) || 0, 0),
         };
       });
@@ -199,10 +214,15 @@ productController.getProductBySku = async (req, res) => {
   }
 };
 
-productController.checkAndDecreaseStock = async (productId, size, quantity) => {
+productController.checkAndDecreaseStock = async (
+  productId,
+  size,
+  color,
+  quantity
+) => {
   const qty = Math.max(parseInt(quantity, 10) || 1, 1);
   const stock = await ProductStock.findOneAndUpdate(
-    { productId, size, quantity: { $gte: qty } },
+    { productId, size, color, quantity: { $gte: qty } },
     { $inc: { quantity: -qty } },
     { new: true }
   );
@@ -214,10 +234,9 @@ productController.checkAndDecreaseStock = async (productId, size, quantity) => {
     quantity: { $gt: 0 },
   });
   if (!hasStock) {
-    await Product.findByIdAndUpdate(productId, { status: "품절" });
+    await Product.findByIdAndUpdate(productId, { status: "\uD488\uC808" });
   }
   return stock;
 };
-
 
 module.exports = productController;
