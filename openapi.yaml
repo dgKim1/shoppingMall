@@ -766,6 +766,7 @@ paths:
                   type: string
                 size:
                   type: string
+                  description: "Allowed sizes by category: shoes=235~285 (step 5), apparel=S/M/L/XL/XXL (also accepts 90/95/100/105/110 and normalizes), accessories=S/M/L."
                 color:
                   type: string
                 quantity:
