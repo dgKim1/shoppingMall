@@ -116,13 +116,17 @@ const seed = async () => {
   const dbProducts = await Product.find({ sku: { $in: seededSkus } });
   const stockDocs = [];
   for (const prod of dbProducts) {
+    const productColors = Array.isArray(prod.color) ? prod.color : [];
     const sizes = getAllowedSizes(prod.categoryMain).map((s) => normalizeSize(s));
     for (const size of sizes) {
-      stockDocs.push({
-        productId: prod._id,
-        size,
-        quantity: Math.floor(Math.random() * 50) + 1,
-      });
+      for (const color of productColors) {
+        stockDocs.push({
+          productId: prod._id,
+          size,
+          color,
+          quantity: Math.floor(Math.random() * 50) + 1,
+        });
+      }
     }
   }
   if (stockDocs.length > 0) {

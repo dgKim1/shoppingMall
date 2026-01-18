@@ -53,6 +53,7 @@ const productSchema = new Schema(
         "bg-slate-400",
         "bg-lime-500",
       ],
+      required: true,
     },
     status: { type: String, default: "active" },
     isDeleted: { type: Boolean, default: false },
