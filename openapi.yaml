@@ -313,6 +313,7 @@ components:
         createdAt: 2025-01-01T12:00:00Z
     Product:
       type: object
+      required: [sku, name, image, price, description, categoryMain, categorySub, color]
       properties:
         _id:
           type: string
@@ -536,7 +537,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/UserResponse"
         "400":
-  /product/createProdcut:
+  /product/createProduct:
     post:
       summary: Create product (admin)
       tags: [Product]
@@ -548,6 +549,7 @@ paths:
           application/json:
             schema:
               type: object
+              required: [color]
               properties:
                 sku:
                   type: string
@@ -575,6 +577,15 @@ paths:
                   type: array
                   items:
                     type: string
+                    enum:
+                      - bg-black
+                      - bg-white
+                      - bg-red-500
+                      - bg-emerald-500
+                      - bg-sky-500
+                      - bg-amber-500
+                      - bg-slate-400
+                      - bg-lime-500
                 status:
                   type: string
                 isDeleted:
