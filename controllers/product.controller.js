@@ -1,5 +1,6 @@
 const Product = require("../Model/Product");
 const ProductStock = require("../Model/ProductStock");
+const { isSizeAllowed, normalizeSize } = require("../utils/sizeRules");
 const productController = {};
 
 productController.createProduct = async (req, res) => {
@@ -14,6 +15,7 @@ productController.createProduct = async (req, res) => {
       categorySub,
       status,
       isDeleted,
+      stocks = [],
     } = req.body;
     if (image && !Array.isArray(image)) {
       image = [image];
@@ -30,6 +32,22 @@ productController.createProduct = async (req, res) => {
       isDeleted,
     });
     await newProduct.save();
+    if (Array.isArray(stocks) && stocks.length > 0) {
+      const stockDocs = stocks.map((stock) => {
+        const normalizedSize = normalizeSize(stock.size);
+        if (!isSizeAllowed(categoryMain, normalizedSize)) {
+          throw new Error("invalid size for category");
+        }
+        return {
+          productId: newProduct._id,
+          size: normalizedSize,
+          quantity: Math.max(parseInt(stock.quantity, 10) || 0, 0),
+        };
+      });
+      if (stockDocs.length > 0) {
+        await ProductStock.insertMany(stockDocs);
+      }
+    }
     return res.status(200).json({ status: "success" });
   } catch (error) {
     res.status(400).json({ status: "fail", error: error.message });
@@ -182,16 +200,23 @@ productController.getProductBySku = async (req, res) => {
 };
 
 productController.checkAndDecreaseStock = async (productId, size, quantity) => {
-    const qty = Math.max(parseInt(quantity, 10) || 1, 1);
-    const stock = await ProductStock.findOneAndUpdate(
-        { productId, size, quantity: { $gte: qty } },
-        { $inc: { quantity: -qty } },
-        { new: true }
-    );
-    if (!stock) {
-        throw new Error("insufficient stock");
-    }
-    return stock;
+  const qty = Math.max(parseInt(quantity, 10) || 1, 1);
+  const stock = await ProductStock.findOneAndUpdate(
+    { productId, size, quantity: { $gte: qty } },
+    { $inc: { quantity: -qty } },
+    { new: true }
+  );
+  if (!stock) {
+    throw new Error("insufficient stock");
+  }
+  const hasStock = await ProductStock.exists({
+    productId,
+    quantity: { $gt: 0 },
+  });
+  if (!hasStock) {
+    await Product.findByIdAndUpdate(productId, { status: "품절" });
+  }
+  return stock;
 };
 
 

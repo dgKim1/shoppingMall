@@ -1,6 +1,8 @@
 const Cart = require("../Model/Cart");
 const CartItem = require("../Model/CartItem");
 const Product = require("../Model/Product");
+const ProductStock = require("../Model/ProductStock");
+const { isSizeAllowed, normalizeSize } = require("../utils/sizeRules");
 
 const cartController = {};
 
@@ -19,6 +21,18 @@ cartController.addToCart = async (req, res) => {
     if (!product) {
       throw new Error("product not found");
     }
+    const normalizedSize = normalizeSize(size);
+    if (!isSizeAllowed(product.categoryMain, normalizedSize)) {
+      throw new Error("invalid size for category");
+    }
+    const stock = await ProductStock.findOne({
+      productId,
+      size: normalizedSize,
+      quantity: { $gte: qty },
+    });
+    if (!stock) {
+      throw new Error("insufficient stock");
+    }
 
     let cart = await Cart.findOne({ userId });
     if (!cart) {
@@ -28,7 +42,7 @@ cartController.addToCart = async (req, res) => {
     let cartItem = await CartItem.findOne({
       cartId: cart._id,
       productId,
-      size,
+      size: normalizedSize,
       color,
     });
 
@@ -39,7 +53,7 @@ cartController.addToCart = async (req, res) => {
       cartItem = await CartItem.create({
         cartId: cart._id,
         productId,
-        size,
+        size: normalizedSize,
         color,
         quantity: qty,
       });
@@ -62,7 +76,13 @@ cartController.getCart = async (req, res) => {
     const cartItems = await CartItem.find({ cartId: cart._id }).populate(
       "productId"
     );
-    return res.status(200).json({ status: "success", data: cartItems });
+    const items = cartItems.map((item) => {
+      const obj = item.toObject();
+      obj.product = obj.productId;
+      delete obj.productId;
+      return obj;
+    });
+    return res.status(200).json({ status: "success", data: items });
   } catch (error) {
     res.status(400).json({ status: "fail", error: error.message });
   }
