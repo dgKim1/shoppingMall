@@ -89,4 +89,47 @@ orderController.createOrder = async (req, res) => {
   }
 };
 
+orderController.getOrderHistory = async (req, res) => {
+  try {
+    const { userId } = req;
+    const orders = await Order.find({ userId })
+      .sort({ createdAt: -1 })
+      .lean();
+
+    if (orders.length === 0) {
+      return res.status(200).json({ status: "success", data: [] });
+    }
+
+    const orderIds = orders.map((order) => order._id);
+    const orderItems = await OrderItem.find({ orderId: { $in: orderIds } })
+      .sort({ _id: 1 })
+      .lean();
+
+    const itemsByOrderId = new Map();
+    for (const item of orderItems) {
+      const key = item.orderId.toString();
+      const list = itemsByOrderId.get(key);
+      if (list) {
+        list.push(item);
+      } else {
+        itemsByOrderId.set(key, [item]);
+      }
+    }
+
+    const data = orders.map((order) => {
+      const obj = { ...order };
+      delete obj.__v;
+      const items = itemsByOrderId.get(order._id.toString()) || [];
+      for (const item of items) {
+        delete item.__v;
+      }
+      return { ...obj, items };
+    });
+
+    return res.status(200).json({ status: "success", data });
+  } catch (error) {
+    res.status(400).json({ status: "fail", error: error.message });
+  }
+};
+
 module.exports = orderController;

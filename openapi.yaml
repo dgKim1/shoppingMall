@@ -290,6 +290,76 @@ components:
           totalPrice: 39.98
           shipTo: Seoul, KR
           createdAt: 2025-01-01T12:00:00Z
+    OrderHistoryResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/OrderWithItems"
+      example:
+        status: success
+        data:
+          - _id: 65f0d1c2a1b2c3d4e5f67894
+            userId: 65f0d1c2a1b2c3d4e5f67890
+            status: preparing
+            orderId: OD12ab34cd5678
+            totalPrice: 39.98
+            shipTo: Seoul, KR
+            createdAt: 2025-01-01T12:00:00Z
+            items:
+              - _id: 65f0d1c2a1b2c3d4e5f67895
+                orderId: 65f0d1c2a1b2c3d4e5f67894
+                productId: 65f0d1c2a1b2c3d4e5f67891
+                productName: Basic Tee
+                size: M
+                color: bg-black
+                price: 19.99
+                quantity: 2
+    OrderWithItems:
+      type: object
+      properties:
+        _id:
+          type: string
+        userId:
+          type: string
+        status:
+          type: string
+        orderId:
+          type: string
+        totalPrice:
+          type: number
+        shipTo:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/OrderItem"
+    OrderItem:
+      type: object
+      properties:
+        _id:
+          type: string
+        orderId:
+          type: string
+        productId:
+          type: string
+        productName:
+          type: string
+        size:
+          type: string
+        color:
+          type: string
+        price:
+          type: number
+        quantity:
+          type: integer
     User:
       type: object
       properties:
@@ -928,6 +998,20 @@ paths:
         "400":
           description: Bad Request
   /order:
+    get:
+      summary: Get order history
+      tags: [Order]
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrderHistoryResponse"
+        "400":
+          description: Bad Request
     post:
       summary: Create order from cart
       tags: [Order]
