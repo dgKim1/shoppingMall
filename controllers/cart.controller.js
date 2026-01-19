@@ -145,6 +145,46 @@ cartController.removeCartItemByProduct = async (req, res) => {
   }
 };
 
+cartController.updateCartItemQuantity = async (req, res) => {
+  try {
+    const { userId } = req;
+    const { id } = req.params;
+    const { quantity } = req.body;
+
+    const qty = parseInt(quantity, 10);
+    if (!Number.isFinite(qty) || qty < 1) {
+      throw new Error("quantity must be a number greater than 0");
+    }
+
+    const cart = await Cart.findOne({ userId });
+    if (!cart) {
+      throw new Error("cart not found");
+    }
+
+    const cartItem = await CartItem.findOne({ _id: id, cartId: cart._id });
+    if (!cartItem) {
+      throw new Error("cart item not found");
+    }
+
+    const stock = await ProductStock.findOne({
+      productId: cartItem.productId,
+      size: cartItem.size,
+      color: cartItem.color,
+      quantity: { $gte: qty },
+    });
+    if (!stock) {
+      throw new Error("insufficient stock");
+    }
+
+    cartItem.quantity = qty;
+    await cartItem.save();
+
+    return res.status(200).json({ status: "success", data: cartItem });
+  } catch (error) {
+    res.status(400).json({ status: "fail", error: error.message });
+  }
+};
+
 cartController.clearCart = async (req, res) => {
   try {
     const { userId } = req;
