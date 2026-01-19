@@ -885,6 +885,37 @@ paths:
         "400":
           description: Bad Request
   /cart/item/{id}:
+    patch:
+      summary: Update cart item quantity
+      tags: [Cart]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [quantity]
+              properties:
+                quantity:
+                  type: integer
+                  minimum: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CartItemResponse"
+        "400":
+          description: Bad Request
     delete:
       summary: Remove cart item by id
       tags: [Cart]
