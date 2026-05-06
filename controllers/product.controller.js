@@ -13,8 +13,8 @@ productController.createProduct = async (req, res) => {
 
 productController.getAllProducts = async (req, res) => {
   try {
-    const result = await productService.getAllProducts(req.query);
-    return res.status(200).json({ status: "success", ...result });
+    const { products, total, totalPages, page } = await productService.getAllProducts(req.query);
+    return res.status(200).json({ status: "success", data: products, total, totalPages, page });
   } catch (error) {
     res.status(400).json({ status: "fail", error: error.message });
   }
@@ -22,8 +22,8 @@ productController.getAllProducts = async (req, res) => {
 
 productController.getProductsBySearch = async (req, res) => {
   try {
-    const result = await productService.getProductsBySearch(req.query);
-    return res.status(200).json({ status: "success", ...result });
+    const { products, total, totalPages, page } = await productService.getProductsBySearch(req.query);
+    return res.status(200).json({ status: "success", data: products, total, totalPages, page });
   } catch (error) {
     res.status(400).json({ status: "fail", error: error.message });
   }
