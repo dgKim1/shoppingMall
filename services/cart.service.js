@@ -1,0 +1,125 @@
+const Cart = require("../model/Cart");
+const CartItem = require("../model/CartItem");
+const Product = require("../model/Product");
+const ProductStock = require("../model/ProductStock");
+const { isSizeAllowed, normalizeSize } = require("../utils/sizeRules");
+
+const cartService = {};
+
+cartService.ensureCartForUser = async (userId) => {
+  const existing = await Cart.findOne({ userId });
+  if (!existing) {
+    await Cart.create({ userId });
+  }
+};
+
+cartService.addToCart = async (userId, productId, size, color, quantity = 1) => {
+  if (!productId || !size || !color) {
+    throw new Error("productId, size, and color are required");
+  }
+  const qty = Math.max(parseInt(quantity, 10) || 1, 1);
+
+  const product = await Product.findById(productId);
+  if (!product) {
+    throw new Error("product not found");
+  }
+  const normalizedSize = normalizeSize(size);
+  if (!isSizeAllowed(product.categoryMain, normalizedSize)) {
+    throw new Error("invalid size for category");
+  }
+  const stock = await ProductStock.findOne({ productId, size: normalizedSize, color, quantity: { $gte: qty } });
+  if (!stock) {
+    throw new Error("insufficient stock");
+  }
+
+  let cart = await Cart.findOne({ userId });
+  if (!cart) {
+    cart = await Cart.create({ userId });
+  }
+
+  let cartItem = await CartItem.findOne({ cartId: cart._id, productId, size: normalizedSize, color });
+  if (cartItem) {
+    cartItem.quantity += qty;
+    await cartItem.save();
+  } else {
+    cartItem = await CartItem.create({ cartId: cart._id, productId, size: normalizedSize, color, quantity: qty });
+  }
+  return cartItem;
+};
+
+cartService.getCart = async (userId) => {
+  const cart = await Cart.findOne({ userId });
+  if (!cart) {
+    return [];
+  }
+  const cartItems = await CartItem.find({ cartId: cart._id }).populate("productId");
+  return cartItems.map((item) => {
+    const obj = item.toObject();
+    obj.product = obj.productId;
+    delete obj.productId;
+    return obj;
+  });
+};
+
+cartService.removeCartItemById = async (userId, id) => {
+  const cart = await Cart.findOne({ userId });
+  if (!cart) {
+    throw new Error("cart not found");
+  }
+  const deletedItem = await CartItem.findOneAndDelete({ _id: id, cartId: cart._id });
+  if (!deletedItem) {
+    throw new Error("cart item not found");
+  }
+  return deletedItem;
+};
+
+cartService.removeCartItemByProduct = async (userId, productId, size, color) => {
+  if (!productId || !size || !color) {
+    throw new Error("productId, size, and color are required");
+  }
+  const cart = await Cart.findOne({ userId });
+  if (!cart) {
+    throw new Error("cart not found");
+  }
+  const deletedItem = await CartItem.findOneAndDelete({ cartId: cart._id, productId, size, color });
+  if (!deletedItem) {
+    throw new Error("cart item not found");
+  }
+  return deletedItem;
+};
+
+cartService.updateCartItemQuantity = async (userId, id, quantity) => {
+  const qty = parseInt(quantity, 10);
+  if (!Number.isFinite(qty) || qty < 1) {
+    throw new Error("quantity must be a number greater than 0");
+  }
+
+  const cart = await Cart.findOne({ userId });
+  if (!cart) {
+    throw new Error("cart not found");
+  }
+
+  const cartItem = await CartItem.findOne({ _id: id, cartId: cart._id });
+  if (!cartItem) {
+    throw new Error("cart item not found");
+  }
+
+  const stock = await ProductStock.findOne({ productId: cartItem.productId, size: cartItem.size, color: cartItem.color, quantity: { $gte: qty } });
+  if (!stock) {
+    throw new Error("insufficient stock");
+  }
+
+  cartItem.quantity = qty;
+  await cartItem.save();
+  return cartItem;
+};
+
+cartService.clearCart = async (userId) => {
+  const cart = await Cart.findOne({ userId });
+  if (!cart) {
+    throw new Error("cart not found");
+  }
+  await CartItem.deleteMany({ cartId: cart._id });
+};
+
+module.exports = cartService;

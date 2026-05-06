@@ -1,178 +1,29 @@
-const Product = require("../Model/Product");
-const ProductStock = require("../Model/ProductStock");
-const { isSizeAllowed, normalizeSize } = require("../utils/sizeRules");
+const productService = require("../services/product.service");
+
 const productController = {};
 
 productController.createProduct = async (req, res) => {
   try {
-    let {
-      sku,
-      name,
-      image,
-      price,
-      description,
-      categoryMain,
-      categorySub,
-      color,
-      status,
-      isDeleted,
-      stocks = [],
-    } = req.body;
-    if (image && !Array.isArray(image)) {
-      image = [image];
-    }
-    if (color && !Array.isArray(color)) {
-      color = [color];
-    }
-    if (!color || color.length === 0) {
-      throw new Error("color is required");
-    }
-    const newProduct = new Product({
-      sku,
-      name,
-      image,
-      price,
-      description,
-      categoryMain,
-      categorySub,
-      color,
-      status,
-      isDeleted,
-    });
-    await newProduct.save();
-    if (Array.isArray(stocks) && stocks.length > 0) {
-      const stockDocs = stocks.map((stock) => {
-        const normalizedSize = normalizeSize(stock.size);
-        if (!isSizeAllowed(categoryMain, normalizedSize)) {
-          throw new Error("invalid size for category");
-        }
-        const stockColor =
-          stock.color ||
-          (Array.isArray(color) && color.length === 1 ? color[0] : null);
-        if (!stockColor) {
-          throw new Error("color is required for stock");
-        }
-        return {
-          productId: newProduct._id,
-          size: normalizedSize,
-          color: stockColor,
-          quantity: Math.max(parseInt(stock.quantity, 10) || 0, 0),
-        };
-      });
-      if (stockDocs.length > 0) {
-        await ProductStock.insertMany(stockDocs);
-      }
-    }
+    await productService.createProduct(req.body);
     return res.status(200).json({ status: "success" });
   } catch (error) {
     res.status(400).json({ status: "fail", error: error.message });
   }
 };
 
-
 productController.getAllProducts = async (req, res) => {
   try {
-    const { page = 1, limit = 12, sort, categoryMain, categorySub, personType } =
-      req.query;
-    const pageNum = Math.max(parseInt(page, 10) || 1, 1);
-    const limitNum = Math.min(Math.max(parseInt(limit, 10) || 12, 1), 100);
-    const skip = (pageNum - 1) * limitNum;
-    let sortOption = null;
-    switch (sort) {
-      case "신상품":
-        sortOption = { createdAt: -1 };
-        break;
-      case "가격 낮은순":
-        sortOption = { price: 1 };
-        break;
-      case "가격 높은순":
-        sortOption = { price: -1 };
-        break;
-      case "추천순":
-        sortOption = { sales: -1 };
-        break;
-      default:
-        sortOption = null;
-        break;
-    }
-
-    const filter = {};
-    if (categoryMain) {
-      filter.categoryMain = categoryMain;
-    }
-    if (categorySub) {
-      filter.categorySub = categorySub;
-    }
-    if (personType) {
-      filter.personType = personType;
-    }
-    const productQuery = Product.find(filter).skip(skip).limit(limitNum);
-    if (sortOption) {
-      productQuery.sort(sortOption);
-    }
-    const [products, total] = await Promise.all([
-      productQuery,
-      Product.countDocuments(filter),
-    ]);
-
-    return res.status(200).json({
-      status: "success",
-      data: products,
-      total,
-      totalPages: Math.ceil(total / limitNum),
-      page: pageNum,
-    });
+    const result = await productService.getAllProducts(req.query);
+    return res.status(200).json({ status: "success", ...result });
   } catch (error) {
     res.status(400).json({ status: "fail", error: error.message });
   }
 };
 
-
 productController.getProductsBySearch = async (req, res) => {
   try {
-    const { name = "", page = 1, limit = 12, sort } = req.query;
-    const pageNum = Math.max(parseInt(page, 10) || 1, 1);
-    const limitNum = Math.min(Math.max(parseInt(limit, 10) || 12, 1), 100);
-    const filter = {};
-    if (name) {
-      filter.name = { $regex: name, $options: "i" };
-    }
-
-    const skip = (pageNum - 1) * limitNum;
-    let sortOption = null;
-    switch (sort) {
-      case "신상품":
-        sortOption = { createdAt: -1 };
-        break;
-      case "가격 낮은순":
-        sortOption = { price: 1 };
-        break;
-      case "가격 높은순":
-        sortOption = { price: -1 };
-        break;
-      case "추천순":
-        sortOption = { createdAt: -1 };
-        break;
-      default:
-        sortOption = null;
-        break;
-    }
-    const productQuery = Product.find(filter).skip(skip).limit(limitNum);
-    if (sortOption) {
-      productQuery.sort(sortOption);
-    }
-    const [products, total] = await Promise.all([
-      productQuery,
-      Product.countDocuments(filter),
-    ]);
-
-    return res.status(200).json({
-      status: "success",
-      data: products,
-      total,
-      totalPages: Math.ceil(total / limitNum),
-      page: pageNum,
-    });
+    const result = await productService.getProductsBySearch(req.query);
+    return res.status(200).json({ status: "success", ...result });
   } catch (error) {
     res.status(400).json({ status: "fail", error: error.message });
   }
@@ -180,19 +31,8 @@ productController.getProductsBySearch = async (req, res) => {
 
 productController.updateProductById = async (req, res) => {
   try {
-    const { id } = req.params;
-    const update = { ...req.body };
-    if (update.image && !Array.isArray(update.image)) {
-      update.image = [update.image];
-    }
-    const updatedProduct = await Product.findByIdAndUpdate(id, update, {
-      new: true,
-      runValidators: true,
-    });
-    if (!updatedProduct) {
-      throw new Error("product not found");
-    }
-    return res.status(200).json({ status: "success", data: updatedProduct });
+    const product = await productService.updateProductById(req.params.id, { ...req.body });
+    return res.status(200).json({ status: "success", data: product });
   } catch (error) {
     res.status(400).json({ status: "fail", error: error.message });
   }
@@ -200,43 +40,11 @@ productController.updateProductById = async (req, res) => {
 
 productController.getProductBySku = async (req, res) => {
   try {
-    const { sku } = req.params;
-    if (!sku) {
-      throw new Error("sku is required");
-    }
-    const product = await Product.findOne({ sku });
-    if (!product) {
-      throw new Error("product not found");
-    }
+    const product = await productService.getProductBySku(req.params.sku);
     return res.status(200).json({ status: "success", data: product });
   } catch (error) {
     res.status(400).json({ status: "fail", error: error.message });
   }
-};
-
-productController.checkAndDecreaseStock = async (
-  productId,
-  size,
-  color,
-  quantity
-) => {
-  const qty = Math.max(parseInt(quantity, 10) || 1, 1);
-  const stock = await ProductStock.findOneAndUpdate(
-    { productId, size, color, quantity: { $gte: qty } },
-    { $inc: { quantity: -qty } },
-    { new: true }
-  );
-  if (!stock) {
-    throw new Error("insufficient stock");
-  }
-  const hasStock = await ProductStock.exists({
-    productId,
-    quantity: { $gt: 0 },
-  });
-  if (!hasStock) {
-    await Product.findByIdAndUpdate(productId, { status: "\uD488\uC808" });
-  }
-  return stock;
 };
 
 module.exports = productController;
